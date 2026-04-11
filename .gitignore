@@ -45,3 +45,8 @@ desktop.ini
 .idea/
 *.suo
 *.user
+
+# ── IR ───────────────────────────────────────────────────────────
+data/cache/ir/
+data/extraction.log
+data/processed/NB02_extraction_cache.json
