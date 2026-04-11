@@ -1,0 +1,47 @@
+appid,title,publisher_group,n_reviews,playtime_r,median_playtime,signal
+1680880,Forspoken,square_enix,2725,0.186,1681.0,advocates_deepen
+997070,Marvel's Avengers,square_enix,1675,0.1299,1086.0,advocates_deepen
+740130,Tales of Arise,bandai_namco,1859,0.12,3115.0,advocates_deepen
+3035570,Assassin's Creed Mirage,ubisoft,2118,0.1198,1817.0,advocates_deepen
+524220,NieR: Automata,square_enix,2222,0.1165,2122.0,advocates_deepen
+2561580,Like a Dragon: Infinite Wealth,sega_atlus,2482,0.1158,2584.0,advocates_deepen
+1151640,Horizon Zero Dawn,sie,2226,0.1101,3230.0,advocates_deepen
+2909400,Final Fantasy VII Rebirth,square_enix,2193,0.1079,4375.0,advocates_deepen
+2515020,Final Fantasy XVI,square_enix,2392,0.0983,3156.0,neutral
+1649080,Two Point Campus,sega_atlus,2171,0.09,2356.0,neutral
+3159330,Assassin's Creed Shadows,ubisoft,1807,0.0875,2957.0,neutral
+1235140,Yakuza: Like a Dragon,sega_atlus,2233,0.0831,3989.0,neutral
+1237320,Sonic Frontiers,sega_atlus,2819,0.0826,1479.0,neutral
+1462040,Final Fantasy VII Remake Intergrade,square_enix,2051,0.0787,2264.0,neutral
+1113560,NieR Replicant,square_enix,2706,0.0778,2540.0,neutral
+2446550,Star Wars Outlaws,ubisoft,4430,0.0768,113.0,neutral
+1649240,Returnal,sie,3396,0.0755,1406.0,neutral
+1672500,Gundam Breaker 4,bandai_namco,2067,0.0745,2772.0,neutral
+1687950,Persona 5 Royal,sega_atlus,1634,0.0687,6270.0,neutral
+921570,Octopath Traveler,square_enix,2008,0.0658,3533.0,neutral
+1245620,Elden Ring,bandai_namco,2170,0.0652,5550.0,neutral
+1295510,Dragon Quest XI S,square_enix,2003,0.0624,4438.0,neutral
+1971650,Octopath Traveler II,square_enix,1627,0.0618,4337.0,neutral
+2322010,God of War Ragnarök,sie,2159,0.0534,3097.0,neutral
+39210,Final Fantasy XIV Online,square_enix,2908,0.0527,15386.0,neutral
+2161700,Persona 3 Reload,sega_atlus,2169,0.0523,4676.0,neutral
+397540,Borderlands 3,take_two,2519,0.0518,2737.0,neutral
+1113000,Persona 4 Golden,sega_atlus,2201,0.0511,4590.0,neutral
+2420110,Horizon Forbidden West,sie,2200,0.0501,4767.0,neutral
+2022670,Sonic Superstars,sega_atlus,2588,0.0474,684.0,neutral
+1895880,Ratchet & Clank: Rift Apart,sie,2798,0.047,1088.0,neutral
+860510,Little Nightmares II,bandai_namco,1266,0.0415,494.0,neutral
+678950,Dragon Ball FighterZ,bandai_namco,2254,0.0375,1736.0,neutral
+502500,Ace Combat 7,bandai_namco,2481,0.0268,1213.0,neutral
+1888930,The Last of Us Part I,sie,1571,0.024,1208.0,neutral
+1790600,Dragon Ball: Sparking! Zero,bandai_namco,2299,0.0239,1873.0,neutral
+2195250,EA Sports FC 24,ea,1359,0.0224,6659.0,neutral
+1817070,Marvel's Spider-Man Remastered,sie,2031,0.0095,1858.0,neutral
+1593500,God of War (2018),sie,1868,0.0066,1877.0,neutral
+1174180,Red Dead Redemption 2,take_two,1904,-0.0011,2416.0,neutral
+1817190,Marvel's Spider-Man: Miles Morales,sie,1887,-0.0118,1040.0,neutral
+1172470,Apex Legends,ea,1892,-0.0156,5348.0,neutral
+2669320,EA Sports FC 25,ea,1177,-0.027,6004.0,neutral
+553850,Helldivers 2,sie,3226,-0.0356,5101.0,neutral
+271590,GTA V,take_two,1337,-0.0641,3176.0,neutral
+1778820,Tekken 8,bandai_namco,2956,-0.0795,7354.0,neutral

@@ -1,0 +1,32 @@
+company,name,fy,segment,source,currency_orig,revenue_orig,revenue_jpy_b
+sony,Sony Group Corporation,2022,Game & Network Services,pdf,JPY,3644.6,3644.6
+sony,Sony Group Corporation,2023,Game & Network Services,pdf,JPY,4267.7,4267.7
+sony,Sony Group Corporation,2024,Game & Network Services,pdf,JPY,4670.0,4670.0
+bandai_namco,Bandai Namco Holdings,2022,Digital,pdf,JPY,373.5,373.5
+bandai_namco,Bandai Namco Holdings,2023,Digital,pdf,JPY,381.1,381.1
+bandai_namco,Bandai Namco Holdings,2024,Digital,pdf,JPY,366.1,366.1
+bandai_namco,Bandai Namco Holdings,2025,Digital,pdf,JPY,450.1,450.1
+sega_sammy,Sega Sammy Holdings,2022,Entertainment Contents,pdf,JPY,235.9,235.9
+sega_sammy,Sega Sammy Holdings,2023,Entertainment Contents,pdf,JPY,282.8,282.8
+sega_sammy,Sega Sammy Holdings,2024,Entertainment Contents,pdf,JPY,318.0,318.0
+sega_sammy,Sega Sammy Holdings,2025,Entertainment Contents,pdf,JPY,321.5,321.5
+square_enix,Square Enix Holdings,2022,Digital Entertainment,pdf,JPY,263.9,263.9
+square_enix,Square Enix Holdings,2023,Digital Entertainment,pdf,JPY,279.6,279.6
+square_enix,Square Enix Holdings,2024,Digital Entertainment,pdf,JPY,245.5,245.5
+square_enix,Square Enix Holdings,2025,Digital Entertainment,pdf,JPY,248.1,248.1
+nintendo,"Nintendo Co., Ltd.",2022,Total Net Sales,pdf,JPY,1695.3,1695.3
+nintendo,"Nintendo Co., Ltd.",2023,Total Net Sales,pdf,JPY,1601.7,1601.7
+nintendo,"Nintendo Co., Ltd.",2024,Total Net Sales,pdf,JPY,1671.9,1671.9
+nintendo,"Nintendo Co., Ltd.",2025,Total Net Sales,pdf,JPY,1164.9,1164.9
+ea,Electronic Arts,2022,Total Net Revenue,edgar,USD,6991.0,804.0
+ea,Electronic Arts,2023,Total Net Revenue,edgar,USD,7426.0,980.2
+ea,Electronic Arts,2024,Total Net Revenue,edgar,USD,7562.0,1096.5
+ea,Electronic Arts,2025,Total Net Revenue,edgar,USD,7463.0,1134.4
+take_two,Take-Two Interactive,2022,Net Bookings,htm,USD,3408.0,391.9
+take_two,Take-Two Interactive,2023,Net Bookings,htm,USD,5284.0,697.5
+take_two,Take-Two Interactive,2024,Net Bookings,htm,USD,5333.0,773.3
+take_two,Take-Two Interactive,2025,Net Bookings,htm,USD,5648.0,858.5
+ubisoft,Ubisoft Entertainment,2022,Net Bookings,pdf,EUR,2128.5,276.7
+ubisoft,Ubisoft Entertainment,2023,Net Bookings,pdf,EUR,1739.5,240.1
+ubisoft,Ubisoft Entertainment,2024,Net Bookings,pdf,EUR,2321.4,366.8
+ubisoft,Ubisoft Entertainment,2025,Net Bookings,pdf,EUR,1850.0,301.6

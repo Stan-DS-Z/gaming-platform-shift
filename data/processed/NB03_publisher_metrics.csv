@@ -1,0 +1,9 @@
+publisher_group,display_name,group,total_titles,titles_per_year,recent_3yr,acceleration,total_reviews,reviews_per_title,median_score,revenue_cagr,revenue_fy24_jpy
+sie,SIE,JP Target,10,1.25,6,0.6,50588,5059,,13.2,4670.0
+bandai_namco,Bandai Namco,JP Target,8,1.0,3,0.375,39471,4934,,6.4,366.1
+sega_atlus,Sega/Atlus,JP Target,8,1.0,3,0.375,38834,4854,,10.9,318.0
+square_enix,Square Enix,JP Target,9,1.12,4,0.444,55197,5018,,-2.0,245.5
+nintendo,Nintendo,JP Benchmark,0,0.0,0,0.0,0,0,,-11.8,1671.9
+ea,EA,Western,3,0.38,2,0.667,15099,5033,,12.2,1096.5
+take_two,Take-Two,Western,2,0.25,0,0.0,15196,5065,,29.9,773.3
+ubisoft,Ubisoft,Western,3,0.38,3,1.0,15296,5099,,2.9,366.8

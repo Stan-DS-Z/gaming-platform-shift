@@ -1,0 +1,47 @@
+appid,title,publisher_group,positive_reception,window_pos_rate,logreg_pred,logreg_proba,correct,display_pub
+39210,Final Fantasy XIV Online,square_enix,0,0.7222,1,0.93,0,Square Enix
+271590,GTA V,take_two,1,0.9349,1,0.516,1,Take-Two
+397540,Borderlands 3,take_two,1,0.8062,1,0.721,1,Take-Two
+502500,Ace Combat 7,bandai_namco,1,0.8865,1,0.532,1,Bandai Namco
+524220,NieR: Automata,square_enix,1,0.9037,1,0.881,1,Square Enix
+553850,Helldivers 2,sie,0,0.7362,1,0.594,0,SIE
+678950,Dragon Ball FighterZ,bandai_namco,1,0.903,1,0.711,1,Bandai Namco
+740130,Tales of Arise,bandai_namco,0,0.7445,1,0.954,0,Bandai Namco
+860510,Little Nightmares II,bandai_namco,1,0.9055,1,0.749,1,Bandai Namco
+921570,Octopath Traveler,square_enix,1,0.8385,1,0.883,1,Square Enix
+997070,Marvel's Avengers,square_enix,0,0.6648,0,0.388,1,Square Enix
+1113000,Persona 4 Golden,sega_atlus,1,0.9688,1,0.903,1,Sega/Atlus
+1113560,NieR Replicant,square_enix,1,0.8777,1,0.787,1,Square Enix
+1151640,Horizon Zero Dawn,sie,1,0.8657,1,0.952,1,SIE
+1172470,Apex Legends,ea,0,0.6677,1,0.549,0,EA
+1174180,Red Dead Redemption 2,take_two,1,0.9413,1,0.924,1,Take-Two
+1235140,Yakuza: Like a Dragon,sega_atlus,1,0.9105,1,0.892,1,Sega/Atlus
+1237320,Sonic Frontiers,sega_atlus,1,0.8374,0,0.369,0,Sega/Atlus
+1245620,Elden Ring,bandai_namco,1,0.9076,1,0.923,1,Bandai Namco
+1295510,Dragon Quest XI S,square_enix,1,0.9109,1,0.907,1,Square Enix
+1462040,Final Fantasy VII Remake Intergrade,square_enix,1,0.8322,1,0.935,1,Square Enix
+1593500,God of War (2018),sie,1,0.9529,1,0.907,1,SIE
+1649080,Two Point Campus,sega_atlus,1,0.8823,1,0.934,1,Sega/Atlus
+1649240,Returnal,sie,1,0.8019,0,0.445,0,SIE
+1672500,Gundam Breaker 4,bandai_namco,0,0.7336,0,0.344,1,Bandai Namco
+1680880,Forspoken,square_enix,0,0.6867,0,0.479,1,Square Enix
+1687950,Persona 5 Royal,sega_atlus,1,0.9565,1,0.958,1,Sega/Atlus
+1778820,Tekken 8,bandai_namco,0,0.47,1,0.69,0,Bandai Namco
+1790600,Dragon Ball: Sparking! Zero,bandai_namco,1,0.7791,1,0.596,1,Bandai Namco
+1817070,Marvel's Spider-Man Remastered,sie,1,0.9604,1,0.89,1,SIE
+1817190,Marvel's Spider-Man: Miles Morales,sie,1,0.9367,1,0.863,1,SIE
+1888930,The Last of Us Part I,sie,1,0.954,1,0.749,1,SIE
+1895880,Ratchet & Clank: Rift Apart,sie,1,0.9097,1,0.948,1,SIE
+1971650,Octopath Traveler II,square_enix,1,0.9089,1,0.928,1,Square Enix
+2022670,Sonic Superstars,sega_atlus,0,0.6862,0,0.373,1,Sega/Atlus
+2161700,Persona 3 Reload,sega_atlus,1,0.9484,1,0.833,1,Sega/Atlus
+2195250,EA Sports FC 24,ea,0,0.6372,0,0.429,1,EA
+2322010,God of War Ragnarök,sie,1,0.917,1,0.911,1,SIE
+2420110,Horizon Forbidden West,sie,1,0.8336,1,0.884,1,SIE
+2446550,Star Wars Outlaws,ubisoft,0,0.2672,0,0.016,1,Ubisoft
+2515020,Final Fantasy XVI,square_enix,1,0.7695,1,0.689,1,Square Enix
+2561580,Like a Dragon: Infinite Wealth,sega_atlus,1,0.8671,1,0.955,1,Sega/Atlus
+2669320,EA Sports FC 25,ea,0,0.6089,1,0.532,0,EA
+2909400,Final Fantasy VII Rebirth,square_enix,1,0.773,1,0.933,1,Square Enix
+3035570,Assassin's Creed Mirage,ubisoft,1,0.7778,1,0.643,1,Ubisoft
+3159330,Assassin's Creed Shadows,ubisoft,0,0.686,1,0.755,0,Ubisoft

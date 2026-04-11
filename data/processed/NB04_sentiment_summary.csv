@@ -1,0 +1,8 @@
+publisher_group,display_name,vader_reviews,vader_compound,pct_positive,revenue_cagr,db_mean,db_median,composite
+sie,SIE,50323,0.211,0.887,13.2,-0.248,-0.908,-0.019
+take_two,Take-Two,15112,0.169,0.894,29.9,-0.224,-0.831,-0.027
+ea,EA,15040,0.093,0.638,12.2,-0.189,-0.785,-0.048
+sega_atlus,Sega/Atlus,38712,0.219,0.89,10.9,-0.337,-0.941,-0.059
+square_enix,Square Enix,54999,0.21,0.808,-2.0,-0.346,-0.944,-0.068
+bandai_namco,Bandai Namco,39350,0.158,0.792,6.4,-0.324,-0.926,-0.083
+ubisoft,Ubisoft,15240,0.125,0.577,2.9,-0.328,-0.928,-0.102

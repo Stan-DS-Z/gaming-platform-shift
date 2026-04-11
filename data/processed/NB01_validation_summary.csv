@@ -1,0 +1,47 @@
+title,publisher_group,appid,release_year,steam_name,price_usd,metacritic_score,has_details,has_steamspy,reviews_collected,total_reviews_steam,has_reviews
+God of War (2018),sie,1593500,2022.0,God of War,49.99,93.0,True,False,1000,,True
+God of War Ragnarök,sie,2322010,2024.0,God of War Ragnarök,59.99,90.0,True,False,1000,,True
+Horizon Zero Dawn,sie,1151640,2020.0,Horizon Zero Dawn™ Complete Edition,,,True,False,1000,,True
+Horizon Forbidden West,sie,2420110,2024.0,Horizon Forbidden West™ Complete Edition,59.99,,True,False,1000,,True
+Marvel's Spider-Man Remastered,sie,1817070,2022.0,Marvel’s Spider-Man Remastered,59.99,,True,False,1000,,True
+Marvel's Spider-Man: Miles Morales,sie,1817190,2022.0,Marvel’s Spider-Man: Miles Morales,49.99,,True,False,1000,,True
+The Last of Us Part I,sie,1888930,2023.0,The Last of Us™ Part I,59.99,,True,False,1000,,True
+Helldivers 2,sie,553850,2024.0,HELLDIVERS™ 2,39.99,,True,False,1000,,True
+Returnal,sie,1649240,2023.0,Returnal™,59.99,,True,False,1000,,True
+Ratchet & Clank: Rift Apart,sie,1895880,2023.0,Ratchet & Clank: Rift Apart,59.99,,True,False,1000,,True
+Elden Ring,bandai_namco,1245620,2022.0,ELDEN RING,59.99,94.0,True,False,1000,,True
+Tekken 8,bandai_namco,1778820,2024.0,TEKKEN 8,59.99,91.0,True,False,1000,,True
+Dragon Ball FighterZ,bandai_namco,678950,2018.0,DRAGON BALL FighterZ,14.39,85.0,True,False,1000,,True
+Dragon Ball: Sparking! Zero,bandai_namco,1790600,2024.0,DRAGON BALL: Sparking! ZERO,49.99,83.0,True,False,1000,,True
+Ace Combat 7,bandai_namco,502500,2020.0,ACE COMBAT™ 7: SKIES UNKNOWN,59.99,78.0,True,False,1000,,True
+Tales of Arise,bandai_namco,1654130,2021.0,孙美琪疑案:雨儿胡同,3.99,,True,False,62,,True
+Gundam Breaker 4,bandai_namco,1672500,2024.0,GUNDAM BREAKER 4,43.19,80.0,True,False,1000,,True
+Little Nightmares II,bandai_namco,860510,2021.0,Little Nightmares II,9.89,83.0,True,False,1000,,True
+Like a Dragon: Infinite Wealth,sega_atlus,2561580,2024.0,Horizon Zero Dawn™ Remastered,49.99,,True,False,1000,,True
+Yakuza: Like a Dragon,sega_atlus,1235140,2021.0,Yakuza: Like a Dragon,19.99,83.0,True,False,1000,,True
+Persona 3 Reload,sega_atlus,2161700,2024.0,Persona 3 Reload,59.99,89.0,True,False,1000,,True
+Persona 4 Golden,sega_atlus,1113000,2020.0,Persona 4 Golden,19.99,87.0,True,False,1000,,True
+Persona 5 Royal,sega_atlus,1687950,2022.0,Persona 5 Royal,59.99,95.0,True,False,1000,,True
+Sonic Frontiers,sega_atlus,1237320,2022.0,Sonic Frontiers,59.99,,True,False,1000,,True
+Sonic Superstars,sega_atlus,2022670,2023.0,SONIC SUPERSTARS,59.99,,True,False,1000,,True
+Two Point Campus,sega_atlus,1649080,2022.0,Two Point Campus,29.99,83.0,True,False,1000,,True
+Final Fantasy VII Remake Intergrade,square_enix,1462040,2021.0,FINAL FANTASY VII REMAKE INTERGRADE,19.99,,True,False,1000,,True
+Final Fantasy XVI,square_enix,2515020,2024.0,FINAL FANTASY XVI,24.99,,True,False,1000,,True
+Final Fantasy XIV Online,square_enix,39210,2013.0,FINAL FANTASY XIV Online,19.99,83.0,True,False,1000,,True
+Final Fantasy VII Rebirth,square_enix,2909400,2024.0,FINAL FANTASY VII REBIRTH,29.99,,True,False,1000,,True
+Dragon Quest XI S,square_enix,1295510,2020.0,DRAGON QUEST® XI S: Echoes of an Elusive Age™ - Definitive Edition,19.99,,True,False,1000,,True
+Octopath Traveler,square_enix,921570,2019.0,OCTOPATH TRAVELER™,23.99,80.0,True,False,1000,,True
+Octopath Traveler II,square_enix,1971650,2023.0,OCTOPATH TRAVELER II,23.99,,True,False,1000,,True
+NieR: Automata,square_enix,524220,2017.0,NieR:Automata™,15.99,84.0,True,False,1000,,True
+NieR Replicant,square_enix,1113560,2021.0,NieR Replicant™ ver.1.22474487139...,23.99,,True,False,1000,,True
+Forspoken,square_enix,1680880,2023.0,Forspoken,20.99,,True,False,1000,,True
+Marvel's Avengers,square_enix,997070,2020.0,Marvel's Avengers - The Definitive Edition,,,True,False,1000,,True
+EA Sports FC 24,ea,2195250,2023.0,EA SPORTS FC™ 24,,,True,False,1099,,True
+EA Sports FC 25,ea,2669320,2024.0,EA SPORTS FC™ 25,69.99,,True,False,1000,,True
+Apex Legends,ea,1172470,2019.0,Apex Legends™,,88.0,True,False,1000,,True
+GTA V,take_two,271590,2015.0,Grand Theft Auto V Legacy,,96.0,True,False,1000,,True
+Red Dead Redemption 2,take_two,1174180,2019.0,Red Dead Redemption 2,59.99,93.0,True,False,1000,,True
+Borderlands 3,take_two,397540,2020.0,Borderlands 3,59.99,81.0,True,False,1000,,True
+Assassin's Creed Mirage,ubisoft,3035570,2023.0,Assassin's Creed Mirage,49.99,,True,False,1000,,True
+Assassin's Creed Shadows,ubisoft,3159330,2025.0,Assassin’s Creed Shadows,69.99,,True,False,1099,,True
+Star Wars Outlaws,ubisoft,2446550,2024.0,STAR WARS™: Battlefront Classic Collection,35.01,,True,False,1000,,True
