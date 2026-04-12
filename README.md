@@ -78,28 +78,28 @@ Publishers who brought strong franchises and disciplined porting processes to PC
 
 | Publisher | Thesis | Verdict |
 |-----------|--------|---------|
-| **SIE** | Systematic porting is a replicable institutional capability | ✅ Confirmed — stronger than expected |
+| **SIE** | Systematic porting is a replicable institutional capability | ✅ Confirmed |
 | **Bandai Namco** | Elden Ring validated an anime IP-to-PC pipeline | ❌ Inverted — limited spillover to other titles |
-| **Sega/Atlus** | Persona executed the most deliberate PC globalisation arc in JP gaming | ✅ Confirmed — Like a Dragon improvement arc even more pronounced |
-| **Square Enix** | Franchise fatigue is visible in Steam data before IR filings | ✅ Confirmed — but variance, not decline, is the real signal |
+| **Sega/Atlus** | Persona executed a sustained PC globalisation strategy across multiple franchises | ✅ Confirmed — Like a Dragon arc even more pronounced |
+| **Square Enix** | Franchise fatigue is visible in Steam data before IR filings | ✅ Confirmed — variance, not decline, is the real signal |
 
 ### Key Analytical Results
 
-**SIE — Institutional quality control.**
-Every SIE title in the corpus scored above OC 81, across four studios and multiple genres. This level of consistency suggests organisational capability rather than individual title success. The console-to-PC release window compressed from four years (God of War 2018) to under two (Ragnarök) while maintaining the quality floor.
+**SIE — Consistent quality across the portfolio.**
+Every SIE title in the corpus scored above OC 81, across four studios and multiple genres. The console-to-PC release window compressed from four years (God of War 2018) to under two (Ragnarök) without a drop in reception scores.
 
-**Bandai Namco — Portfolio concentration risk.**
-Elden Ring accounts for 75.1% of Bandai Namco's total Steam recommendations (HHI: 0.574). Excluding it, the catalog's average positive rate drops to 77.5%. The remaining IP lineup (Tales, Gundam, Dragon Ball) has not achieved comparable PC performance.
+**Bandai Namco — Elden Ring concentration risk.**
+Elden Ring accounts for 75.1% of Bandai Namco's total Steam recommendations (HHI: 0.574). Excluding it, the catalogue's average positive rate falls to 77.5%. The remaining IP lineup — Tales, Gundam, Dragon Ball — has not reached comparable PC reception.
 
-**Sega/Atlus — Staged globalisation.**
-The Persona franchise shows sustained high sentiment across three PC entries. The Like a Dragon rebranding produced the strongest improving sentiment arc in the corpus. This improvement is observable in Steam data ahead of its reflection in IR filings.
+**Sega/Atlus — Improving over time.**
+The Persona franchise holds sustained high sentiment across three PC entries. The Like a Dragon rebranding produced the strongest improving sentiment arc in the corpus — an improvement visible in Steam data before it appears in IR filings.
 
-**Square Enix — Quality variance.**
-OC range: 66.4 (Forspoken) to 91.9 (FF7 Rebirth). Standard deviation of 8.3 — the widest in the corpus. The capability exists, but the gap between titles creates unpredictability for players. The Forspoken case is analytically notable: lowest critic score in the corpus but the strongest advocate-deepening playtime correlation (r = +0.186), suggesting an underserved audience affected by launch execution and PC port quality issues.
+**Square Enix — High variance.**
+OC range: 66.4 (Forspoken) to 91.9 (FF7 Rebirth). Standard deviation of 8.3, the widest in the corpus. Forspoken sits at the bottom on critic scores, but records the highest playtime-sentiment correlation (r = +0.186) — a dedicated audience that the launch execution and port quality failed to reach.
 
 ### Sentiment Pipeline
 
-Three tiers of sentiment analysis, cross-validated to ensure findings are model-robust.
+Three tiers of sentiment analysis. Publisher-level rankings are consistent across all three models.
 
 | Tier | Model | Sample | Scope |
 |------|-------|--------|-------|
@@ -107,15 +107,13 @@ Three tiers of sentiment analysis, cross-validated to ensure findings are model-
 | 2 | DistilBERT | 22,796 reviews | Stratified English sample — higher accuracy, known sampling artifact |
 | 3 | Claude Haiku API | 2,270 reviews | Proportional multilingual sample — theme extraction + pc_specific signal |
 
-Publisher-level rankings are consistent across all three tiers, validating the aggregate findings regardless of individual model limitations.
-
 ### Predictive Model
 
 **Business question:** Can launch-window signals predict whether a PC port will achieve positive long-term reception?
 
-Logistic Regression (L2, LOOCV). Accuracy 0.80, AUC 0.79 (vs 0.717 majority-class baseline). At n=46, this is a proof-of-concept — the **feature importance ranking** is the primary finding, not the accuracy figure.
+Logistic Regression (L2, LOOCV). Accuracy 0.80, AUC 0.79 (vs 0.717 majority-class baseline). At n=46 this is a proof-of-concept — the **feature importance ranking** is the primary finding, not the accuracy figure.
 
-The strongest positive predictors are OC score (critic consensus) and VADER compound (player sentiment). The strongest negative predictor is the PC-specific negative commentary rate, indicating that port quality is a measurable risk factor for long-term reception.
+Strongest positive predictors: OC score and VADER compound. Strongest negative predictor: PC-specific negative commentary rate — port quality is a measurable risk factor for long-term reception.
 
 ![Predictive Model: Feature Importance & Per-Publisher Accuracy](docs/NB06_model_chart.png)
 *特徴量重要度と出版社別LOOCV精度*
@@ -185,7 +183,6 @@ The strongest positive predictors are OC score (critic consensus) and VADER comp
 - Predictive model at n=46 is a proof-of-concept, not a production-grade predictor
 - IR revenue data is at gaming segment level; PC-specific revenue is not publicly disclosed
 - JPY/USD moved approximately 30% over the study period; CAGR figures are directional
-- Console release dates are not available for all titles in the registry
 - OpenCritic RapidAPI free tier is rate-limited to approximately 100 requests per day
 
 ---
