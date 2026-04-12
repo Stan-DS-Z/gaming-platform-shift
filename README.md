@@ -1,5 +1,8 @@
 # The Platform Shift
 
+**PCへの移行は、日本パブリッシャーの収益軌道を変えたのか？**
+Does the shift to PC change the revenue trajectory of Japanese game publishers?
+
 ![Sentiment vs Revenue CAGR — 46 titles, 228,776 Steam reviews](docs/hero_chart.png)
 
 <p align="center">
@@ -15,7 +18,23 @@
 
 ---
 
-## 🇯🇵 日本語
+## 仮説 / Hypothesis
+
+> PC移植の「量」は収益軌道を予測しない（R²≈0.01）。移植の「質」が予測する。  
+> 強いフランチャイズと規律あるポーティング体制をPCに持ち込んだパブリッシャーは、測定可能で複利的な優位性を得ている。
+
+> PC port volume does not predict revenue trajectory (R² ≈ 0.01). Port quality does.  
+> Publishers who brought strong franchises and disciplined porting to PC gained measurable, compounding advantages.
+
+---
+
+## 検証結果 / Verdict
+
+**4社中3社で確認。** SIE・セガ/アトラス・スクウェア・エニックスはいずれも仮説を支持する。バンダイナムコは逆説的——エルデンリングが他IPへの波及なしにポートフォリオの75.1%を占める。
+
+**Confirmed in 3 of 4 publishers.** SIE, Sega/Atlus, and Square Enix all support the hypothesis. Bandai Namco is the exception — Elden Ring accounts for 75.1% of the portfolio without meaningful spillover to other titles.
+
+---
 
 ### 中心的な発見
 
