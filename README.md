@@ -227,6 +227,4 @@ jupyter lab
 
 ---
 
-*「データはすでにそこにある。読み方を知っているかどうかだけの話だ。」*
-
-*The data was always there. It's just a question of knowing how to read it.*
+*Analysis by Stanley Shi · [LinkedIn](https://www.linkedin.com/in/stanley-shi-7b604b104/) · 2026*
