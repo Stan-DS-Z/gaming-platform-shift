@@ -1,26 +1,26 @@
 franchise,seq_idx,title,publisher_group,release_pc,n_reviews,mean_compound,pct_positive,release_console,gap_days,gap_category
-Persona,0,Persona 4 Golden,sega_atlus,2020-06-13,4993,0.2005,0.9688,,,Unknown
-Persona,1,Persona 5 Royal,sega_atlus,2022-10-21,5081,0.1434,0.9565,,,Unknown
-Persona,2,Persona 3 Reload,sega_atlus,2024-02-02,4979,0.1577,0.9484,,,Unknown
-Like a Dragon,0,Yakuza: Like a Dragon,sega_atlus,2021-01-13,4983,0.2127,0.9105,,,Unknown
-Like a Dragon,1,Like a Dragon: Infinite Wealth,sega_atlus,2024-01-26,5072,0.2763,0.8671,,,Unknown
-Sonic,0,Sonic Frontiers,sega_atlus,2022-11-08,5092,0.2374,0.8374,,,Unknown
-Sonic,1,Sonic Superstars,sega_atlus,2023-10-17,3534,0.2712,0.6862,,,Unknown
-NieR,0,NieR: Automata,square_enix,2017-03-17,4987,0.1847,0.9037,,,Unknown
-NieR,1,NieR Replicant,square_enix,2021-04-22,4987,0.2289,0.8777,,,Unknown
-Final Fantasy VII,0,Final Fantasy VII Remake Intergrade,square_enix,2021-12-16,4971,0.2105,0.8322,,,Unknown
-Final Fantasy VII,1,Final Fantasy VII Rebirth,square_enix,2024-01-23,5084,0.2015,0.773,,,Unknown
-Octopath Traveler,0,Octopath Traveler,square_enix,2019-06-07,4977,0.2073,0.8385,,,Unknown
-Octopath Traveler,1,Octopath Traveler II,square_enix,2023-02-24,4985,0.1913,0.9089,,,Unknown
-Dragon Ball,0,Dragon Ball FighterZ,bandai_namco,2018-01-26,4978,0.1544,0.903,,,Unknown
-Dragon Ball,1,Dragon Ball: Sparking! Zero,bandai_namco,2024-10-11,5083,0.1496,0.7791,,,Unknown
-Horizon,0,Horizon Zero Dawn,sie,2020-08-07,5062,0.2318,0.8657,,,Unknown
-Horizon,1,Horizon Forbidden West,sie,2024-03-21,4963,0.2085,0.8336,,,Unknown
-Spider-Man,0,Marvel's Spider-Man Remastered,sie,2022-08-12,4976,0.2038,0.9604,,,Unknown
-Spider-Man,1,Marvel's Spider-Man: Miles Morales,sie,2022-11-18,4973,0.1877,0.9367,,,Unknown
-God of War,0,God of War (2018),sie,2022-01-14,5075,0.1402,0.9529,,,Unknown
-God of War,1,God of War Ragnarök,sie,2024-09-19,5072,0.1666,0.917,,,Unknown
-Assassin's Creed,0,Assassin's Creed Mirage,ubisoft,2023-10-05,5072,0.1796,0.7778,,,Unknown
-Assassin's Creed,1,Assassin's Creed Shadows,ubisoft,2025-03-20,5074,0.1171,0.686,,,Unknown
-EA Sports FC,0,EA Sports FC 24,ea,2023-09-29,5074,0.0916,0.6372,,,Unknown
-EA Sports FC,1,EA Sports FC 25,ea,2024-09-27,4983,0.0836,0.6089,,,Unknown
+Persona,0,Persona 4 Golden,sega_atlus,2020-06-13,4993,0.2005,0.9688,2012-06-14,2921.0,Long wait (>2yr)
+Persona,1,Persona 5 Royal,sega_atlus,2022-10-21,5081,0.1434,0.9565,2019-10-31,1086.0,Long wait (>2yr)
+Persona,2,Persona 3 Reload,sega_atlus,2024-02-02,4979,0.1577,0.9484,2024-02-02,0.0,Day-and-date
+Like a Dragon,0,Yakuza: Like a Dragon,sega_atlus,2021-01-13,4983,0.2127,0.9105,2020-01-16,363.0,Short wait (1–12m)
+Like a Dragon,1,Like a Dragon: Infinite Wealth,sega_atlus,2024-01-26,5072,0.2763,0.8671,2024-01-26,0.0,Day-and-date
+Sonic,0,Sonic Frontiers,sega_atlus,2022-11-08,5092,0.2374,0.8374,2022-11-08,0.0,Day-and-date
+Sonic,1,Sonic Superstars,sega_atlus,2023-10-17,3534,0.2712,0.6862,2023-10-17,0.0,Day-and-date
+NieR,0,NieR: Automata,square_enix,2017-03-17,4987,0.1847,0.9037,2017-02-23,22.0,Near-simultaneous (≤30d)
+NieR,1,NieR Replicant,square_enix,2021-04-22,4987,0.2289,0.8777,2021-04-22,0.0,Day-and-date
+Final Fantasy VII,0,Final Fantasy VII Remake Intergrade,square_enix,2021-12-16,4971,0.2105,0.8322,2021-06-10,189.0,Short wait (1–12m)
+Final Fantasy VII,1,Final Fantasy VII Rebirth,square_enix,2024-01-23,5084,0.2015,0.773,2024-02-29,329.0,Short wait (1–12m)
+Octopath Traveler,0,Octopath Traveler,square_enix,2019-06-07,4977,0.2073,0.8385,2018-07-13,329.0,Short wait (1–12m)
+Octopath Traveler,1,Octopath Traveler II,square_enix,2023-02-24,4985,0.1913,0.9089,2023-02-24,0.0,Day-and-date
+Dragon Ball,0,Dragon Ball FighterZ,bandai_namco,2018-01-26,4978,0.1544,0.903,2018-01-26,0.0,Day-and-date
+Dragon Ball,1,Dragon Ball: Sparking! Zero,bandai_namco,2024-10-11,5083,0.1496,0.7791,2024-10-11,0.0,Day-and-date
+Horizon,0,Horizon Zero Dawn,sie,2020-08-07,5062,0.2318,0.8657,2017-02-28,1256.0,Long wait (>2yr)
+Horizon,1,Horizon Forbidden West,sie,2024-03-21,4963,0.2085,0.8336,2022-02-18,762.0,Long wait (>2yr)
+Spider-Man,0,Marvel's Spider-Man Remastered,sie,2022-08-12,4976,0.2038,0.9604,2020-11-12,638.0,Medium wait (1–2yr)
+Spider-Man,1,Marvel's Spider-Man: Miles Morales,sie,2022-11-18,4973,0.1877,0.9367,2020-11-12,736.0,Long wait (>2yr)
+God of War,0,God of War (2018),sie,2022-01-14,5075,0.1402,0.9529,2018-04-20,1365.0,Long wait (>2yr)
+God of War,1,God of War Ragnarök,sie,2024-09-19,5072,0.1666,0.917,2022-11-09,680.0,Medium wait (1–2yr)
+Assassin's Creed,0,Assassin's Creed Mirage,ubisoft,2023-10-05,5072,0.1796,0.7778,2023-10-05,0.0,Day-and-date
+Assassin's Creed,1,Assassin's Creed Shadows,ubisoft,2025-03-20,5074,0.1171,0.686,2025-03-20,0.0,Day-and-date
+EA Sports FC,0,EA Sports FC 24,ea,2023-09-29,5074,0.0916,0.6372,2023-09-29,0.0,Day-and-date
+EA Sports FC,1,EA Sports FC 25,ea,2024-09-27,4983,0.0836,0.6089,2024-09-27,0.0,Day-and-date

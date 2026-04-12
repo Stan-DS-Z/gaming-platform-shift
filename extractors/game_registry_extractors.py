@@ -47,7 +47,7 @@ GAME_REGISTRY = {
         "Final Fantasy VII Remake Intergrade": {"appid": 1462040, "release_pc": "2021-12-16"},
         "Final Fantasy XVI":              {"appid": 2515020, "release_pc": "2024-09-17"},
         "Final Fantasy XIV Online":       {"appid": 39210,   "release_pc": "2013-08-27"},
-        "Final Fantasy VII Rebirth":      {"appid": 2909400, "release_pc": "2024-01-23"},  # NOTE: verify this ID
+        "Final Fantasy VII Rebirth":      {"appid": 2909400, "release_pc": "2025-01-23"},  # PS5 2024-02-29, PC 2025-01-23 (329 days)
         "Dragon Quest XI S":              {"appid": 1295510, "release_pc": "2020-12-04"},
         "Octopath Traveler":              {"appid": 921570,  "release_pc": "2019-06-07"},
         "Octopath Traveler II":           {"appid": 1971650, "release_pc": "2023-02-24"},

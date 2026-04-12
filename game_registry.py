@@ -57,7 +57,7 @@ GAME_REGISTRY = {
         "Final Fantasy VII Remake Intergrade": {"appid": 1462040, "release_pc": "2021-12-16", "release_console": "2021-06-10"},  # PS5 Intergrade Jun 2021
         "Final Fantasy XVI":              {"appid": 2515020, "release_pc": "2024-09-17", "release_console": "2023-06-22"},  # PS5 Jun 2023
         "Final Fantasy XIV Online":       {"appid": 39210,   "release_pc": "2013-08-27", "release_console": None},            # PC-native MMO; PS3/PS4 versions followed
-        "Final Fantasy VII Rebirth":      {"appid": 2909400, "release_pc": "2024-01-23", "release_console": "2024-02-29"},  # NOTE: verify appid; PS5 Feb 2024, PC Jan 2025 per patch — registry date may be incorrect
+        "Final Fantasy VII Rebirth":      {"appid": 2909400, "release_pc": "2025-01-23", "release_console": "2024-02-29"},  # PS5 Feb 2024, PC Jan 2025 (329 days)
         "Dragon Quest XI S":              {"appid": 1295510, "release_pc": "2020-12-04", "release_console": "2017-07-29"},  # JP PS4 Jul 2017
         "Octopath Traveler":              {"appid": 921570,  "release_pc": "2019-06-07", "release_console": "2018-07-13"},  # Switch Jul 2018
         "Octopath Traveler II":           {"appid": 1971650, "release_pc": "2023-02-24", "release_console": "2023-02-24"},  # simultaneous
