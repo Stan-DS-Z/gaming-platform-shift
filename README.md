@@ -2,10 +2,6 @@
 
 ![Sentiment vs Revenue CAGR — 46 titles, 228,776 Steam reviews](docs/hero_chart.png)
 
-> **PCへの移行は、すでに強いものをもっと強くする。**
->
-> *A platform shift amplifies what's already there. It doesn't rescue what isn't.*
-
 <p align="center">
   <a href="https://ss-gaming-platform-shift.streamlit.app/">
     <img src="https://img.shields.io/badge/%F0%9F%8E%AE_ダッシュボード-ss--gaming--platform--shift.streamlit.app-9A7820?style=for-the-badge" alt="Dashboard">
