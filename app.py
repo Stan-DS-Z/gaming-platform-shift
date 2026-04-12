@@ -212,7 +212,7 @@ T = {
         "footer":           "The Platform Shift: A Deep Dive · 7 notebooks · 228,776 Steam reviews · 46 titles ·",
     },
     "ja": {
-        "eyebrow":          "深掘り分析 · ゲーム産業分析",
+        "eyebrow":          "徹底分析 · ゲーム業界",
         "subtitle":         "日本パブリッシャーのPC戦略 2022–2025 · 46タイトル · 228,776件のSteamレビュー · JP4社＋欧米3社ベンチマーク",
         "finding_label":    "中心的な発見",
         "finding_body":     "PCは救済ではなく、増幅器だ。強いフランチャイズはPCで複利的に成長する——実行力が弱ければ、逆方向に増幅される。移植の「量」（R²≈0.01）は収益軌道を予測しない。移植の「質」が予測する。",
