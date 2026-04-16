@@ -1,3 +1,4 @@
+# deps v2 — force cloud rebuild
 streamlit==1.56.0
 plotly==5.24.1
 pandas==2.2.3
