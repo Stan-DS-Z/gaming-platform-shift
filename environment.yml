@@ -10,6 +10,7 @@ dependencies:
   # ── Core data ───────────────────────────────────────────────────
   - pandas>=2.0.0
   - numpy>=1.24.0
+  - scikit-learn>=1.3.0
 
   # ── Visualization ───────────────────────────────────────────────
   - matplotlib>=3.7.0
@@ -27,5 +28,4 @@ dependencies:
     - textblob>=0.17.0
     # Japanese NLP — run after environment activation:
     # pip install ginza ja-ginza
-    # Streamlit — deferred until dashboard phase:
-    # streamlit>=1.28.0
+    - streamlit==1.56.0
