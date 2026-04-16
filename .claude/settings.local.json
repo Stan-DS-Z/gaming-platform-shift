@@ -3,7 +3,10 @@
     "allow": [
       "Bash(~/miniconda3/envs/platform_shift/python.exe generate_hero_chart.py)",
       "Bash(~/anaconda3/envs/platform_shift/python.exe generate_hero_chart.py)",
-      "Bash(~/anaconda3/envs/platform_shift/python.exe generate_feature_importance.py)"
+      "Bash(~/anaconda3/envs/platform_shift/python.exe generate_feature_importance.py)",
+      "Bash(~/anaconda3/envs/platform_shift/python.exe -m streamlit run app.py --server.headless true)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:8501)",
+      "Bash('~/anaconda3/envs/platform_shift/python.exe' -c ' *)"
     ]
   }
 }

@@ -150,9 +150,9 @@ _q_decline = dict(fontsize=8.5, color='#D4827B',
 Q_MX = 0.005   # x margin in data units
 Q_MY = 1.5     # y margin in CAGR % units
 
-ax.text(x_min + Q_MX, y_max - Q_MY,
+ax.text(x_min + Q_MX, y_max - Q_MY - 5.5,
         'low sentiment · high growth\n低感情・高成長',
-        ha='left', va='top', fontproperties=_jp, **_q_growth)
+        ha='left', va='top', fontproperties=_jp, zorder=2, **_q_growth)
 
 ax.text(x_max - Q_MX, y_max - Q_MY,
         'high sentiment · high growth\n高感情・高成長',
@@ -162,7 +162,7 @@ ax.text(x_min + Q_MX, y_min + Q_MY,
         'low sentiment · declining\n低感情・減収',
         ha='left', va='bottom', fontproperties=_jp, **_q_decline)
 
-ax.text(x_max - Q_MX, y_min + Q_MY,
+ax.text(x_max - Q_MX, y_min + Q_MY + 2.5,
         'high sentiment · declining\n高感情・減収',
         ha='right', va='bottom', fontproperties=_jp, **_q_decline)
 
@@ -262,9 +262,9 @@ leg = ax.legend(
 
 # ── R² annotation — bottom-right interior, below zero line ────────
 # Placed at a fixed data coordinate that stays clear of Square Enix
-ax.text(x_max - 0.002, y_mid - (y_mid - y_min) * 0.3,
+ax.text(x_min + Q_MX, y_min + 0.4,
         f'R² = {r2:.2f}   ·   r = {r:+.2f}',
-        fontsize=8.5, color='#4A5A7A', ha='right', va='center',
+        fontsize=8.5, color='#4A5A7A', ha='left', va='bottom',
         fontfamily='monospace')
 
 # ── Axes styling ───────────────────────────────────────────────────

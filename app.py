@@ -983,15 +983,16 @@ elif st.session_state.active_tab == 1:
         "コーパス内の全46タイトルと主要指標。<strong>OCスコア</strong>＝OpenCritic集計（ローンチ時の批評家合意）。<strong>VADER</strong>＝Steamレビューの平均感情値。<strong>ポジ%</strong>＝ポジティブレビューの割合。<strong>ギャップ日数</strong>＝コンソール→PCリリースまでの日数。<strong>ローンチΔ</strong>＝ローンチ後の受容変化（正＝回復）。<strong>PCネガ%</strong>＝PC版を具体的に批判するレビューの割合。<strong>予測</strong>＝長期的なポジティブ受容のモデル予測確率。任意の列でソート可能。テーブル下のセレクタでタイトル詳細を表示。",
     )
 
-    # ── Feature importance — contextualises the table columns ──────
+    # ── Feature importance — frames which table columns matter most
     if not coef_df.empty:
         _section_label(
-            "特徴量重要度 — 各指標の予測力" if st.session_state.lang == "日本語"
+            "特徴量重要度 — 各指標の予測力"
+            if st.session_state.lang == "日本語"
             else "Feature importance — predictive weight of each metric"
         )
         _explain_bi(
-            "The bars show how strongly each column in the table below predicts long-term positive reception. Green = pushes toward positive; red = pushes toward negative. Coefficients are standardised so magnitudes are directly comparable.",
-            "下のテーブルの各列が、長期的なポジティブ受容をどれだけ強く予測するかを示す。緑＝ポジティブ方向、赤＝ネガティブ方向。係数は標準化済みで大きさを直接比較可能。",
+            "The bars show how strongly each column below predicts long-term positive reception. Green = pushes toward positive; red = pushes toward negative. Coefficients are standardised — magnitudes are directly comparable.",
+            "下のテーブルの各列が長期的なポジティブ受容をどれだけ強く予測するかを示す。緑＝ポジティブ方向、赤＝ネガティブ方向。係数は標準化済み。",
         )
         coef_sorted = coef_df.sort_values("coefficient", ascending=True)
         feat_display = coef_sorted["feature"].map(
@@ -1026,7 +1027,7 @@ elif st.session_state.active_tab == 1:
             margin=dict(l=8, r=68, t=8, b=40),
         )
         st.plotly_chart(fig_fi, use_container_width=True)
-        st.markdown("<div style='height:12px;'></div>", unsafe_allow_html=True)
+        st.markdown("<div style='height:8px;'></div>", unsafe_allow_html=True)
 
     # ── Publisher filter ──
     pub_options = [t("all_filter")] + [DISPLAY_NAMES[p] for p in ALL_PUBS

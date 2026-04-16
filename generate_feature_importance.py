@@ -181,21 +181,23 @@ fig.text(
 )
 
 # ── Footer ─────────────────────────────────────────────────────────
+# Row 1 (higher): methodology note — left-aligned
 fig.text(
-    0.12, 0.02,
+    0.12, 0.04,
     'Coefficients from LogisticRegression(L2, C=1.0)  ·  '
     'Features standardised via StandardScaler  ·  '
     'Missing values imputed with corpus median',
     fontsize=6.5, color='#2A3555', ha='left', va='bottom',
 )
+# Row 2 (lower): watermark — right-aligned
 fig.text(
-    0.92, 0.02,
+    0.92, 0.01,
     'The Platform Shift',
     fontsize=6.5, color='#2A3555', ha='right', va='bottom', fontstyle='italic',
 )
 
 # ── Layout & save ──────────────────────────────────────────────────
-fig.subplots_adjust(left=0.26, right=0.90, top=0.84, bottom=0.14)
+fig.subplots_adjust(left=0.26, right=0.90, top=0.84, bottom=0.22)
 
 out = OUT_DIR / 'feature_importance.png'
 plt.savefig(out, dpi=160, bbox_inches='tight',
