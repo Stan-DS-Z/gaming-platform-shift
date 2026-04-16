@@ -498,45 +498,53 @@ def build_title_table():
 
 @st.cache_data
 def compute_model_coefficients():
-    """Recompute logistic regression coefficients from feature matrix.
-    n=46 is instant. This avoids needing a separate coefficients CSV.
-    Loads the CSV directly to avoid nested @st.cache_data call issues."""
+    """Recompute logistic regression coefficients from feature matrix."""
     p = PROC / "NB06_feature_matrix.csv"
+    print(f"[coef] Looking for feature matrix at: {p}")
+    print(f"[coef] File exists: {p.exists()}")
     if not p.exists():
+        print("[coef] EARLY RETURN — file not found")
         return pd.DataFrame()
     try:
         feat = pd.read_csv(str(p))
-        from sklearn.linear_model import LogisticRegression
-        from sklearn.preprocessing import StandardScaler
-        from sklearn.impute import SimpleImputer
+        print(f"[coef] CSV loaded: {feat.shape} | columns: {feat.columns.tolist()}")
 
         available_cols = [c for c in FEATURE_COLS if c in feat.columns]
+        print(f"[coef] Available feature cols: {available_cols}")
+        print(f"[coef] positive_reception present: {'positive_reception' in feat.columns}")
+
         if not available_cols or "positive_reception" not in feat.columns:
+            print("[coef] EARLY RETURN — missing columns")
             return pd.DataFrame()
 
         X = feat[available_cols].copy()
         y = feat["positive_reception"].values
 
-        # Impute + scale
+        from sklearn.linear_model import LogisticRegression
+        from sklearn.preprocessing import StandardScaler
+        from sklearn.impute import SimpleImputer
+
         imp = SimpleImputer(strategy="median")
         X_imp = imp.fit_transform(X)
         scaler = StandardScaler()
         X_scaled = scaler.fit_transform(X_imp)
 
-        # Fit on all data (coefficients for display)
         clf = LogisticRegression(penalty="l2", C=1.0, max_iter=1000,
                                  random_state=42, solver="lbfgs")
         clf.fit(X_scaled, y)
 
-        return pd.DataFrame({
+        result = pd.DataFrame({
             "feature":     available_cols,
             "coefficient": clf.coef_[0],
             "abs_coef":    np.abs(clf.coef_[0]),
         }).sort_values("abs_coef", ascending=False)
 
+        print(f"[coef] SUCCESS — {len(result)} coefficients computed")
+        return result
+
     except Exception as e:
         import traceback
-        traceback.print_exc()   # visible in Streamlit Cloud logs
+        traceback.print_exc()
         return pd.DataFrame()
 
 # Load all data
