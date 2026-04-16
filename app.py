@@ -496,7 +496,7 @@ def build_title_table():
 
     return df
 
-@st.cache_data
+@st.cache_data(ttl=0)
 def compute_model_coefficients():
     """Recompute logistic regression coefficients from feature matrix."""
     p = PROC / "NB06_feature_matrix.csv"
