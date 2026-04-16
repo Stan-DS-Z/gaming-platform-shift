@@ -3,6 +3,9 @@
 **PCへの移行は、日本パブリッシャーの収益軌道を変えたのか？**
 Does the shift to PC change the revenue trajectory of Japanese game publishers?
 
+22万件以上のSteamレビューで、日本パブリッシャーのPC戦略が機能しているかを検証したデータ分析プロジェクト。
+A data analytics project examining whether Japanese publishers' PC strategy is working — told through 228,776 Steam reviews.
+
 ![Sentiment vs Revenue CAGR — 46 titles, 228,776 Steam reviews](docs/hero_chart.png)
 
 <p align="center">
