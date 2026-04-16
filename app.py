@@ -534,7 +534,9 @@ def compute_model_coefficients():
             "abs_coef":    np.abs(clf.coef_[0]),
         }).sort_values("abs_coef", ascending=False)
 
-    except Exception:
+    except Exception as e:
+        import traceback
+        traceback.print_exc()   # visible in Streamlit Cloud logs
         return pd.DataFrame()
 
 # Load all data
