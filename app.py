@@ -499,15 +499,16 @@ def build_title_table():
 @st.cache_data
 def compute_model_coefficients():
     """Recompute logistic regression coefficients from feature matrix.
-    n=46 is instant. This avoids needing a separate coefficients CSV."""
-    feat = load_feature_matrix()
-    if feat.empty:
+    n=46 is instant. This avoids needing a separate coefficients CSV.
+    Loads the CSV directly to avoid nested @st.cache_data call issues."""
+    p = PROC / "NB06_feature_matrix.csv"
+    if not p.exists():
         return pd.DataFrame()
     try:
+        feat = pd.read_csv(str(p))
         from sklearn.linear_model import LogisticRegression
         from sklearn.preprocessing import StandardScaler
         from sklearn.impute import SimpleImputer
-        from sklearn.model_selection import LeaveOneOut
 
         available_cols = [c for c in FEATURE_COLS if c in feat.columns]
         if not available_cols or "positive_reception" not in feat.columns:
@@ -527,15 +528,13 @@ def compute_model_coefficients():
                                  random_state=42, solver="lbfgs")
         clf.fit(X_scaled, y)
 
-        coef_df = pd.DataFrame({
+        return pd.DataFrame({
             "feature":     available_cols,
             "coefficient": clf.coef_[0],
             "abs_coef":    np.abs(clf.coef_[0]),
         }).sort_values("abs_coef", ascending=False)
 
-        return coef_df
-
-    except ImportError:
+    except Exception:
         return pd.DataFrame()
 
 # Load all data
