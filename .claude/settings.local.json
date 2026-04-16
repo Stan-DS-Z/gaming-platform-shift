@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(~/miniconda3/envs/platform_shift/python.exe generate_hero_chart.py)",
+      "Bash(~/anaconda3/envs/platform_shift/python.exe generate_hero_chart.py)",
+      "Bash(~/anaconda3/envs/platform_shift/python.exe generate_feature_importance.py)"
+    ]
+  }
+}
