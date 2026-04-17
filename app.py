@@ -121,12 +121,12 @@ FEATURE_LABELS_JA = {
 T = {
     "en": {
         # Header
-        "eyebrow":          "Deep dive · Gaming industry analysis",
+        "eyebrow":          "Data analysis · Gaming industry",
         "subtitle":         "Japanese publisher PC strategy 2022–2025 · 46 titles · 228,776 Steam reviews · 4 JP publishers + 3 Western benchmarks",
-        "finding_label":    "Central finding",
-        "finding_body":     "PC is an amplifier, not a rescue. Strong franchises compound on PC — weak execution gets amplified in the wrong direction. Port <em>volume</em> (R²&thinsp;≈&thinsp;0.01) does not predict revenue trajectory. Port <em>quality</em> does.",
+        "finding_label":    "What this project measures",
+        "finding_body":     "Japanese publishers have been bringing console titles to PC. Some ports landed well with players. Others did not. This project measures the gap — using Steam reviews, OpenCritic scores, and IR filings to examine who executed well, and what public data can and cannot tell us.",
         # Tabs
-        "tab_thesis":       "Thesis & verdicts",
+        "tab_thesis":       "Overview",
         "tab_titles":       "Title explorer",
         "tab_publisher":    "Publisher deep dive",
         "tab_model":        "Predictive model",
@@ -139,7 +139,7 @@ T = {
         "quad_hs_hg":       "high sentiment · high growth",
         "quad_ls_dc":       "low sentiment · declining",
         "quad_hs_dc":       "high sentiment · declining",
-        "section_verdicts": "Publisher verdicts — click to drill into titles",
+        "section_verdicts": "Publisher profiles — select any for full detail",
         # Tab 2 — Title Explorer
         "section_titles":   "Title explorer — every game in the corpus",
         "filter_pub":       "Filter by publisher",
@@ -200,10 +200,10 @@ T = {
         # Verdict
         "confirmed":        "Confirmed",
         "inverted":         "Inverted",
-        "verdict_sie":      "Strong franchises compound on PC",
-        "verdict_sega":     "Persona & Like a Dragon arc",
-        "verdict_sqenix":   "Variance is the signal, not decline",
-        "verdict_bandai":   "Elden Ring masks pipeline failure",
+        "verdict_sie":      "Consistent quality across 10 titles, four studios",
+        "verdict_sega":     "Persona stable; Like a Dragon improving arc",
+        "verdict_sqenix":   "Widest OC variance in the corpus",
+        "verdict_bandai":   "Portfolio anchored by Elden Ring at 75.1%",
         "card_cagr":        "CAGR",
         "card_sent":        "VADER",
         "card_pos":         "Pos%",
@@ -212,11 +212,11 @@ T = {
         "footer":           "The Platform Shift: A Deep Dive · 7 notebooks · 228,776 Steam reviews · 46 titles ·",
     },
     "ja": {
-        "eyebrow":          "徹底分析 · ゲーム業界",
+        "eyebrow":          "データ分析 · ゲーム業界",
         "subtitle":         "日本パブリッシャーのPC戦略 2022–2025 · 46タイトル · 228,776件のSteamレビュー · JP4社＋欧米3社ベンチマーク",
-        "finding_label":    "中心的な発見",
-        "finding_body":     "PCは救済ではなく、増幅器だ。強いフランチャイズはPCで複利的に成長する——実行力が弱ければ、逆方向に増幅される。移植の「量」（R²≈0.01）は収益軌道を予測しない。移植の「質」が予測する。",
-        "tab_thesis":       "仮説と評価",
+        "finding_label":    "このプロジェクトが測定するもの",
+        "finding_body":     "日本の大手パブリッシャーはコンソールタイトルをPCに展開してきた。プレイヤーに届いた移植もあれば、そうでないものもある。このプロジェクトはその差を測定する——Steamレビュー、OpenCriticスコア、IR資料を用いて、誰が実行品質で抜きん出たかを公開データの範囲で明らかにする。",
+        "tab_thesis":       "概要",
         "tab_titles":       "タイトル一覧",
         "tab_publisher":    "パブリッシャー詳細",
         "tab_model":        "予測モデル",
@@ -228,7 +228,7 @@ T = {
         "quad_hs_hg":       "高感情 · 高成長",
         "quad_ls_dc":       "低感情 · 減収",
         "quad_hs_dc":       "高感情 · 減収",
-        "section_verdicts": "パブリッシャー評価 — クリックでタイトル詳細へ",
+        "section_verdicts": "パブリッシャー概要 — 詳細はパブリッシャー詳細タブへ",
         "section_titles":   "タイトル一覧 — コーパス内の全ゲーム",
         "filter_pub":       "パブリッシャーでフィルター",
         "all_filter":       "全て",
@@ -285,10 +285,10 @@ T = {
         "model_features":   "特徴量数",
         "confirmed":        "確認済み",
         "inverted":         "逆説的",
-        "verdict_sie":      "強いフランチャイズがPCで複利成長",
-        "verdict_sega":     "ペルソナ＆龍が如くの成長弧",
-        "verdict_sqenix":   "分散が信号——衰退ではない",
-        "verdict_bandai":   "エルデンリングがパイプライン失敗を隠蔽",
+        "verdict_sie":      "10タイトル、4スタジオにわたる一貫した品質",
+        "verdict_sega":     "ペルソナ安定、龍が如く改善弧",
+        "verdict_sqenix":   "コーパス内最大のOCスコア分散",
+        "verdict_bandai":   "推薦数の75.1%をエルデンリングが占める",
         "card_cagr":        "CAGR",
         "card_sent":        "VADER",
         "card_pos":         "ポジ%",
@@ -298,10 +298,10 @@ T = {
 }
 
 VERDICTS = {
-    "sie":          ("✓", "confirmed", "verdict_sie"),
-    "sega_atlus":   ("✓", "confirmed", "verdict_sega"),
-    "square_enix":  ("✓", "confirmed", "verdict_sqenix"),
-    "bandai_namco": ("⚠", "inverted",  "verdict_bandai"),
+    "sie":          ("", "", "verdict_sie"),
+    "sega_atlus":   ("", "", "verdict_sega"),
+    "square_enix":  ("", "", "verdict_sqenix"),
+    "bandai_namco": ("", "", "verdict_bandai"),
 }
 
 # ══════════════════════════════════════════════════════════════════
