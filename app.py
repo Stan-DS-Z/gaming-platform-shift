@@ -536,16 +536,22 @@ def compute_model_coefficients():
         traceback.print_exc()
         return pd.DataFrame()
 
+@st.cache_data
+def load_publisher_chart():
+    p = PROC / "NB04_publisher_chart.csv"
+    return pd.read_csv(str(p)) if p.exists() else pd.DataFrame()
+
 # Load all data
-sentiment_df = load_sentiment()
-hhi_df       = load_hhi()
-lang_df      = load_language_dist()
-pc_df        = load_pc_specific()
-feat_df      = load_feature_matrix()
-results_df   = load_logreg_results()
-timeline_df  = load_port_timeline()
-title_df     = build_title_table()
-coef_df      = compute_model_coefficients()
+sentiment_df   = load_sentiment()
+hhi_df         = load_hhi()
+lang_df        = load_language_dist()
+pc_df          = load_pc_specific()
+feat_df        = load_feature_matrix()
+results_df     = load_logreg_results()
+timeline_df    = load_port_timeline()
+title_df       = build_title_table()
+coef_df        = compute_model_coefficients()
+pub_chart_df   = load_publisher_chart()
 
 # ══════════════════════════════════════════════════════════════════
 # 7. CSS
@@ -771,198 +777,189 @@ if _new_idx != st.session_state.active_tab:
 # TAB 1 — Thesis & Verdicts
 # ══════════════════════════════════════════════════════════════════
 if st.session_state.active_tab == 0:
-    if sentiment_df.empty:
-        st.error("NB04_sentiment_summary.csv not found in data/processed/")
+    if pub_chart_df.empty:
+        st.error("NB04_publisher_chart.csv not found — run prepare_publisher_chart_data.py first.")
         st.stop()
 
-    valid   = sentiment_df.dropna(subset=["revenue_cagr", "vader_compound"])
-    x_arr   = valid["vader_compound"].values.astype(float)
-    y_arr   = valid["revenue_cagr"].values.astype(float)
-    z       = np.polyfit(x_arr, y_arr, 1)
-    p_fit   = np.poly1d(z)
-    y_pred  = p_fit(x_arr)
-    ss_res  = np.sum((y_arr - y_pred) ** 2)
-    ss_tot  = np.sum((y_arr - y_arr.mean()) ** 2)
-    r2      = round(1 - ss_res / ss_tot, 3) if ss_tot > 0 else 0
-    pearson = round(float(np.corrcoef(x_arr, y_arr)[0, 1]), 3)
-
-    X_MID = 0.17
-    y_min = float(y_arr.min()) - 6
-    y_max = float(y_arr.max()) + 6
-
-    fig1 = go.Figure()
-
-    # Quadrant shading
-    for x0, x1, y0, y1 in [
-        (X_MID, 0.275, 0, y_max), (0.065, X_MID, 0, y_max),
-        (X_MID, 0.275, y_min, 0), (0.065, X_MID, y_min, 0),
-    ]:
-        fig1.add_shape(type="rect", x0=x0, x1=x1, y0=y0, y1=y1,
-                       xref="x", yref="y", fillcolor=C["border"],
-                       opacity=0.5, line_width=0, layer="below")
-
-    fig1.add_vline(x=X_MID, line=dict(color=C["border2"], width=1, dash="dot"))
-    fig1.add_hline(y=0,     line=dict(color=C["border2"], width=1, dash="dot"))
-
-    # Trend line
-    x_line = np.linspace(x_arr.min() - 0.01, x_arr.max() + 0.01, 120)
-    fig1.add_trace(go.Scatter(
-        x=x_line, y=p_fit(x_line), mode="lines",
-        line=dict(color=C["ghost"], width=1.5, dash="dash"),
-        showlegend=False, hoverinfo="skip",
-    ))
-
-    # Benchmark squares
-    for pub in BENCHMARKS:
-        row = sentiment_df[sentiment_df["publisher_group"] == pub]
-        if row.empty:
-            continue
-        r    = row.iloc[0]
-        size = max(12, min(38, float(r["vader_reviews"]) / 900))
-        fig1.add_trace(go.Scatter(
-            x=[r["vader_compound"]], y=[r["revenue_cagr"]],
-            mode="markers",
-            marker=dict(size=size, color=C["bg"], opacity=1.0,
-                        line=dict(color=PUBLISHER_COLORS[pub], width=2),
-                        symbol="square"),
-            name=DISPLAY_NAMES[pub],
-            customdata=[[r["vader_reviews"], r["pct_positive"], r["revenue_cagr"]]],
-            hovertemplate=(
-                f"<b>{DISPLAY_NAMES[pub]}</b><br>"
-                f"{t('metric_sentiment')}  %{{x:.3f}}<br>"
-                f"{t('metric_cagr')}  %{{customdata[2]:+.1f}}%<br>"
-                f"{t('metric_positive')}  %{{customdata[1]:.1%}}<br>"
-                f"{t('metric_reviews')}  %{{customdata[0]:,.0f}}<br>"
-                "<extra></extra>"
-            ),
-        ))
-
-    # JP target circles
-    for pub in JP_TARGETS:
-        row = sentiment_df[sentiment_df["publisher_group"] == pub]
-        if row.empty:
-            continue
-        r    = row.iloc[0]
-        size = max(24, min(64, float(r["vader_reviews"]) / 900))
-        fig1.add_trace(go.Scatter(
-            x=[r["vader_compound"]], y=[r["revenue_cagr"]],
-            mode="markers",
-            marker=dict(size=size, color=PUBLISHER_COLORS[pub], opacity=0.82,
-                        line=dict(color=C["surface"], width=2), symbol="circle"),
-            name=DISPLAY_NAMES[pub],
-            customdata=[[r["vader_reviews"], r["pct_positive"], r["revenue_cagr"]]],
-            hovertemplate=(
-                f"<b>{DISPLAY_NAMES[pub]}</b><br>"
-                f"{t('metric_sentiment')}  %{{x:.3f}}<br>"
-                f"{t('metric_cagr')}  %{{customdata[2]:+.1f}}%<br>"
-                f"{t('metric_positive')}  %{{customdata[1]:.1%}}<br>"
-                f"{t('metric_reviews')}  %{{customdata[0]:,.0f}}<br>"
-                "<extra></extra>"
-            ),
-        ))
-
-    # Labels
-    label_nudge = {
-        "sie":          (0.012, 3.5), "sega_atlus":   (0.008, -3.0),
-        "square_enix":  (0.008, 3.5), "bandai_namco": (0.008,  2.5),
-        "ea":           (0.004,  1.5), "take_two":     (0.004,  1.5),
-        "ubisoft":      (0.004,  1.5),
-    }
-    for pub in ALL_PUBS:
-        row = sentiment_df[sentiment_df["publisher_group"] == pub]
-        if row.empty:
-            continue
-        r      = row.iloc[0]
-        dx, dy = label_nudge.get(pub, (0.004, 1.4))
-        is_jp  = pub in JP_TARGETS
-        icon   = VERDICTS[pub][0] if pub in VERDICTS else ""
-        label  = f"{DISPLAY_NAMES[pub]}{' ' + icon if is_jp else ''}"
-        fig1.add_annotation(
-            x=float(r["vader_compound"]) + dx, y=float(r["revenue_cagr"]) + dy,
-            text=label, showarrow=False, xanchor="left",
-            font=dict(family=SANS, size=13 if is_jp else 11,
-                      color=PUBLISHER_COLORS[pub] if is_jp else C["muted"]),
-        )
-
-    # Quadrant labels
-    for qx, qy, qk in [
-        (0.068, y_max * 0.90, "quad_ls_hg"),
-        (X_MID + 0.003, y_max * 0.90, "quad_hs_hg"),
-        (0.068, y_min * 0.82, "quad_ls_dc"),
-        (X_MID + 0.003, y_min * 0.82, "quad_hs_dc"),
-    ]:
-        fig1.add_annotation(x=qx, y=qy, text=t(qk), showarrow=False, xanchor="left",
-                            font=dict(family=SANS, size=10, color=C["ghost"]))
-
-    # R² annotation
-    fig1.add_annotation(
-        x=0.99, y=0.02, xref="paper", yref="paper",
-        text=f"R² = {r2:.2f} &nbsp;·&nbsp; r = {pearson:+.2f}",
-        showarrow=False, align="right",
-        font=dict(family=MONO, size=12, color=C["muted"]),
-    )
-
-    fig1.update_layout(**_base(h=540))
-    fig1.update_layout(
-        xaxis=_xax(title=dict(text=t("axis_sentiment"),
-                              font=dict(size=13, color=C["muted"])),
-                   range=[0.065, 0.275]),
-        yaxis=_yax(title=dict(text=t("axis_cagr"),
-                              font=dict(size=13, color=C["muted"]))),
-        showlegend=False,
-        margin=dict(l=65, r=65, t=30, b=60),
-    )
-
-    st.markdown(
-        f"<p style='font-family:{SANS};font-size:12px;font-weight:500;"
-        f"color:{C['muted']};letter-spacing:0.04em;text-transform:uppercase;"
-        f"margin-bottom:8px;'>{t('chart_scatter')}</p>",
-        unsafe_allow_html=True,
+    # ── Section label ──────────────────────────────────────────────
+    _section_label(
+        "PC移植実行品質：IP期待値 vs プレイヤー受容"
+        if st.session_state.lang == "日本語"
+        else "PC port execution quality — critic expectations vs player reception"
     )
     _explain_bi(
-        "Each bubble is a publisher's PC game portfolio. <strong>Right = better-received games</strong> (higher VADER sentiment from Steam reviews). <strong>Up = stronger revenue growth</strong> (CAGR from IR filings). Bubble size reflects total Steam reviews — a proxy for audience reach. The near-flat dashed trend line (R² ≈ 0.01) is the thesis: shipping <em>more</em> PC ports doesn't drive revenue. The <em>quality</em> of those ports does.",
-        "各バブルはパブリッシャーのPCゲームポートフォリオを表す。<strong>右＝高評価</strong>（Steamレビューからの VADER感情値）。<strong>上＝収益成長</strong>（IR資料からのCAGR）。バブルサイズはSteamレビュー数に比例。点線の近似直線（R²≈0.01）が仮説を証明する：PCへの移植「数」は収益を予測しない。移植の「質」が予測する。",
+        "Each bubble is a publisher's PC portfolio weighted by Steam recommendations. "
+        "The diagonal is the expectations line — above it, the port overdelivered "
+        "relative to critic consensus; below it, it underdelivered. "
+        "Bubble size reflects total Steam recommendations across the publisher's catalog. "
+        "Hover for details. All metrics weighted by Steam recommendations per title.",
+        "各バブルはSteam推薦数で加重したパブリッシャーのPCポートフォリオ。"
+        "対角線は期待値ライン——上側は批評家評価を上回る移植、下側は下回る移植。"
+        "バブルサイズはカタログ全体のSteam推薦数合計。ホバーで詳細表示。"
     )
+
+    # ── Build Plotly figure ────────────────────────────────────────
+    fig1 = go.Figure()
+
+    diag_min = min(
+        pub_chart_df["weighted_oc"].min() - 3,
+        pub_chart_df["weighted_pos"].min() - 3,
+    )
+    diag_max = max(
+        pub_chart_df["weighted_oc"].max() + 3,
+        pub_chart_df["weighted_pos"].max() + 3,
+    )
+
+    # Expectations line (diagonal y = x)
+    fig1.add_trace(go.Scatter(
+        x=[diag_min, diag_max],
+        y=[diag_min, diag_max],
+        mode="lines",
+        line=dict(color=C["ghost"], width=1.5, dash="dash"),
+        showlegend=False, hoverinfo="skip",
+        name="Expectations line",
+    ))
+
+    # Shading above and below diagonal
+    fig1.add_shape(
+        type="rect",
+        x0=diag_min, x1=diag_max,
+        y0=diag_min, y1=diag_max,
+        xref="x", yref="y",
+        fillcolor=C["border"], opacity=0.15,
+        line_width=0, layer="below",
+    )
+
+    # Bubbles
+    size_min = pub_chart_df["total_recs"].min()
+    size_max = pub_chart_df["total_recs"].max()
+
+    for _, row in pub_chart_df.iterrows():
+        pub    = row["publisher_group"]
+        color  = PUBLISHER_COLORS.get(pub, C["muted"])
+        is_jp  = pub in JP_TARGETS
+        symbol = "circle" if is_jp else "square"
+        size   = 20 + 60 * (
+            (row["total_recs"] - size_min) /
+            max(size_max - size_min, 1)
+        )
+        fig1.add_trace(go.Scatter(
+            x=[row["weighted_oc"]],
+            y=[row["weighted_pos"]],
+            mode="markers+text",
+            marker=dict(
+                size=size,
+                color=color,
+                opacity=0.88,
+                symbol=symbol,
+                line=dict(
+                    color=C["surface"] if is_jp else C["ghost"],
+                    width=2 if is_jp else 1,
+                ),
+            ),
+            text=DISPLAY_NAMES.get(pub, pub),
+            textposition="top center",
+            textfont=dict(family=SANS, size=12, color=color),
+            name=DISPLAY_NAMES.get(pub, pub),
+            showlegend=False,
+            hovertemplate=(
+                f"<b>{DISPLAY_NAMES.get(pub, pub)}</b><br>"
+                f"OC score (weighted): %{{x:.1f}}<br>"
+                f"Steam positive rate: %{{y:.1f}}%<br>"
+                f"Most recommended: {row['champion']}"
+                f" ({row['champion_share']:.1f}%)<br>"
+                f"Total recommendations: {int(row['total_recs']):,}"
+                "<extra></extra>"
+            ),
+        ))
+
+    # Zone labels
+    fig1.add_annotation(
+        x=diag_min + 1, y=diag_max - 1,
+        text="overdelivered" if st.session_state.lang != "日本語"
+             else "IP期待を上回る",
+        showarrow=False, xanchor="left",
+        font=dict(family=SANS, size=11, color=C["muted"]),
+    )
+    fig1.add_annotation(
+        x=diag_max - 1, y=diag_min + 1,
+        text="underdelivered" if st.session_state.lang != "日本語"
+             else "IP期待を下回る",
+        showarrow=False, xanchor="right",
+        font=dict(family=SANS, size=11, color=C["muted"]),
+    )
+
+    fig1.update_layout(**_base(h=560))
+    fig1.update_layout(
+        xaxis=_xax(
+            title=dict(
+                text="OC Score (weighted)"
+                if st.session_state.lang != "日本語"
+                else "OCスコア（加重平均）",
+                font=dict(size=13, color=C["muted"]),
+            ),
+            range=[diag_min, diag_max],
+        ),
+        yaxis=_yax(
+            title=dict(
+                text="Steam Positive Rate % (weighted)"
+                if st.session_state.lang != "日本語"
+                else "Steamポジティブ率（加重平均）",
+                font=dict(size=13, color=C["muted"]),
+            ),
+            range=[diag_min, diag_max],
+            ticksuffix="%",
+        ),
+        showlegend=False,
+        margin=dict(l=70, r=40, t=30, b=70),
+    )
+
     st.plotly_chart(fig1, use_container_width=True)
-    st.caption(t("caption_scatter"))
 
     # ── Verdict cards ──
     _section_label(t("section_verdicts"))
     _explain_bi(
-        "Four hypotheses about Japanese publisher PC strategy, tested against 228,776 Steam reviews and public IR filings. <strong>Confirmed</strong> = the data supports the thesis. <strong>Inverted</strong> = the data tells the opposite story. Select any card's publisher in the Title Explorer tab to see the individual games behind these numbers.",
-        "日本パブリッシャーのPC戦略に関する4つの仮説を、228,776件のSteamレビューとIR資料で検証。<strong>確認済み</strong>＝データが仮説を支持。<strong>逆説的</strong>＝データが逆の結果を示す。タイトル一覧タブで各パブリッシャーの個別タイトルを確認可能。",
+        "Each publisher's PC strategy in the data. "
+        "Select any publisher in the Publisher Deep Dive "
+        "tab to explore the individual titles behind "
+        "these numbers.",
+        "各パブリッシャーのPCデータサマリー。"
+        "パブリッシャー詳細タブで個別タイトルを確認可能。",
     )
     v_cols = st.columns(4, gap="small")
     for i, pub in enumerate(JP_TARGETS):
-        icon, status_key, detail_key = VERDICTS[pub]
-        col   = PUBLISHER_COLORS[pub]
-        row   = sentiment_df[sentiment_df["publisher_group"] == pub]
-        cagr  = f"{row.iloc[0]['revenue_cagr']:+.1f}%" if not row.empty else "—"
-        comp  = f"{row.iloc[0]['vader_compound']:.3f}"  if not row.empty else "—"
-        ppos  = f"{row.iloc[0]['pct_positive']:.1%}"    if not row.empty else "—"
-        s_col = C["up"] if status_key == "confirmed" else C["warn"]
-
-        # Count titles for this publisher
-        n_titles = len(title_df[title_df["publisher_group"] == pub]) if not title_df.empty else "?"
+        col      = PUBLISHER_COLORS[pub]
+        row      = sentiment_df[sentiment_df["publisher_group"] == pub]
+        comp     = f"{row.iloc[0]['vader_compound']:.3f}" if not row.empty else "—"
+        ppos     = f"{row.iloc[0]['pct_positive']:.1%}"   if not row.empty else "—"
+        n_titles = len(title_df[title_df["publisher_group"] == pub]) \
+                   if not title_df.empty else "?"
+        pc_row      = pub_chart_df[pub_chart_df["publisher_group"] == pub]
+        champion    = pc_row.iloc[0]["champion"]       if not pc_row.empty else "—"
+        champ_share = pc_row.iloc[0]["champion_share"] if not pc_row.empty else 0
 
         with v_cols[i]:
             st.markdown(f"""
-<div style="border-left:3px solid {col};background:{C['surface']};
-            border:1px solid {C['border']};border-left:3px solid {col};
-            padding:18px 18px 16px;border-radius:0 4px 4px 0;height:100%;">
-  <div style="font-family:{SANS};font-size:16px;font-weight:600;
-              color:{col};margin-bottom:6px;">{DISPLAY_NAMES[pub]}</div>
-  <div style="font-family:{SANS};font-size:11px;font-weight:600;color:{s_col};
-              letter-spacing:0.06em;margin-bottom:8px;">
-    {icon} {t(status_key).upper()}
+<div style="border-left:3px solid {col};
+            background:{C['surface']};
+            border:1px solid {C['border']};
+            border-left:3px solid {col};
+            padding:18px 18px 16px;
+            border-radius:0 4px 4px 0;
+            height:100%;">
+  <div style="font-family:{SANS};font-size:16px;
+              font-weight:600;color:{col};
+              margin-bottom:12px;">
+    {DISPLAY_NAMES[pub]}
   </div>
-  <div style="font-family:{SANS};font-size:13px;color:{C['muted']};
-              margin-bottom:14px;line-height:1.55;">{t(detail_key)}</div>
-  <div style="font-family:{MONO};font-size:12px;color:{C['muted']};line-height:2.0;">
-    {t('card_cagr')} &nbsp;&nbsp;{cagr}<br>
+  <div style="font-family:{MONO};font-size:12px;
+              color:{C['muted']};line-height:2.2;">
     {t('card_sent')} &nbsp;&nbsp;{comp}<br>
     {t('card_pos')} &nbsp;&nbsp;{ppos}<br>
-    {n_titles} {t('card_titles')}
+    {n_titles} {t('card_titles')}<br>
+    <span style="color:{C['text']};font-size:11px;">
+    {champion} &nbsp;·&nbsp; {champ_share:.1f}%
+    </span>
   </div>
 </div>""", unsafe_allow_html=True)
 
