@@ -781,12 +781,6 @@ if st.session_state.active_tab == 0:
         st.error("NB04_publisher_chart.csv not found — run prepare_publisher_chart_data.py first.")
         st.stop()
 
-    # ── Section label ──────────────────────────────────────────────
-    _section_label(
-        "PC移植実行品質：IP期待値 vs プレイヤー受容"
-        if st.session_state.lang == "日本語"
-        else "PC port execution quality — critic expectations vs player reception"
-    )
     _explain_bi(
         "Each bubble is a publisher's PC portfolio weighted by Steam recommendations. "
         "The diagonal is the expectations line — above it, the port overdelivered "
@@ -798,154 +792,249 @@ if st.session_state.active_tab == 0:
         "バブルサイズはカタログ全体のSteam推薦数合計。ホバーで詳細表示。"
     )
 
-    # ── Build Plotly figure ────────────────────────────────────────
+    # ── Build Plotly figure (replicates generate_hero_chart.py) ───
     fig1 = go.Figure()
 
-    diag_min = min(
-        pub_chart_df["weighted_oc"].min() - 3,
-        pub_chart_df["weighted_pos"].min() - 3,
-    )
-    diag_max = max(
-        pub_chart_df["weighted_oc"].max() + 3,
-        pub_chart_df["weighted_pos"].max() + 3,
+    # Axis ranges — replicate lines 164-167 of generate_hero_chart.py
+    XMIN = pub_chart_df["weighted_oc"].min()  - 4
+    XMAX = pub_chart_df["weighted_oc"].max()  + 11
+    YMIN = pub_chart_df["weighted_pos"].min() - 5
+    YMAX = pub_chart_df["weighted_pos"].max() + 10
+
+    # Bubble sizes — replicate line 161
+    r_min = pub_chart_df["total_recs"].min()
+    r_max = pub_chart_df["total_recs"].max()
+    pub_chart_df = pub_chart_df.copy()
+    pub_chart_df["sz"] = 28 + 55 * (
+        (pub_chart_df["total_recs"] - r_min) /
+        max(r_max - r_min, 1)
     )
 
-    # Expectations line (diagonal y = x)
+    # Diagonal expectations line
     fig1.add_trace(go.Scatter(
-        x=[diag_min, diag_max],
-        y=[diag_min, diag_max],
+        x=[XMIN, XMAX], y=[XMIN, XMAX],
         mode="lines",
-        line=dict(color=C["ghost"], width=1.5, dash="dash"),
-        showlegend=False, hoverinfo="skip",
+        line=dict(color="#4A6A9A", width=1.5, dash="dash"),
+        opacity=0.7,
+        showlegend=True,
         name="Expectations line",
+        hoverinfo="skip",
     ))
 
-    # Shading above and below diagonal
+    # Above diagonal — blue tint
     fig1.add_shape(
-        type="rect",
-        x0=diag_min, x1=diag_max,
-        y0=diag_min, y1=diag_max,
-        xref="x", yref="y",
-        fillcolor=C["border"], opacity=0.15,
+        type="path",
+        path=f"M {XMIN},{XMIN} L {XMIN},{YMAX} L {XMAX},{YMAX} L {XMAX},{XMAX} Z",
+        fillcolor="#071420", opacity=0.4,
         line_width=0, layer="below",
     )
 
-    # Individual title dots (underneath publisher bubbles)
-    pub_valid = set(pub_chart_df["publisher_group"])
-    title_dots = feat_df[
-        feat_df["publisher_group"].isin(pub_valid) &
-        feat_df["oc_score"].notna() &
-        feat_df["window_pos_rate"].notna()
-    ].copy()
-    for pub_key, grp in title_dots.groupby("publisher_group"):
-        dot_color = PUBLISHER_COLORS.get(pub_key, C["muted"])
-        fig1.add_trace(go.Scatter(
-            x=grp["oc_score"],
-            y=grp["window_pos_rate"] * 100,
-            mode="markers",
-            marker=dict(size=8, color=dot_color, opacity=0.45),
-            showlegend=False,
-            hovertemplate=(
-                "<b>%{customdata}</b><br>"
-                "OC: %{x:.1f}<br>"
-                "Steam positive: %{y:.1f}%"
-                "<extra></extra>"
-            ),
-            customdata=grp["title"].values,
-        ))
+    # Below diagonal — red tint
+    fig1.add_shape(
+        type="path",
+        path=f"M {XMIN},{XMIN} L {XMAX},{XMIN} L {XMAX},{XMAX} Z",
+        fillcolor="#150808", opacity=0.4,
+        line_width=0, layer="below",
+    )
 
-    # Publisher bubbles
-    size_min = pub_chart_df["total_recs"].min()
-    size_max = pub_chart_df["total_recs"].max()
+    # Zone labels — replicate lines 199-209
+    fig1.add_annotation(
+        x=XMIN + (XMAX - XMIN) * 0.02,
+        y=YMAX - (YMAX - YMIN) * 0.02,
+        text="overdelivered" if st.session_state.lang != "日本語"
+             else "IP期待を上回る",
+        showarrow=False,
+        xanchor="left", yanchor="top",
+        font=dict(family=SANS, size=11, color="#7BAFD4"),
+        bgcolor="#0A1828", borderpad=4,
+        opacity=0.72,
+    )
+    fig1.add_annotation(
+        x=XMAX - (XMAX - XMIN) * 0.02,
+        y=YMIN + (YMAX - YMIN) * 0.02,
+        text="underdelivered" if st.session_state.lang != "日本語"
+             else "IP期待を下回る",
+        showarrow=False,
+        xanchor="right", yanchor="bottom",
+        font=dict(family=SANS, size=11, color="#D4827B"),
+        bgcolor="#1A0808", borderpad=4,
+        opacity=0.72,
+    )
 
-    label_positions = {
-        "sega_atlus":   "top left",
-        "take_two":     "bottom right",
-        "sie":          "top right",
-        "square_enix":  "middle left",
-        "bandai_namco": "top right",
-        "ea":           "top left",
-        "ubisoft":      "bottom right",
+    # Label layout — replicate LABEL_LAYOUT lines 216-232
+    LABEL_LAYOUT = {
+        "sega_atlus":   (83.02, 93.5,  "left"),
+        "take_two":     (82.5,  85.5,  "right"),
+        "sie":          (89.5,  86.68, "left"),
+        "square_enix":  (81.0,  78.78, "right"),
+        "bandai_namco": (86.7,  74.5,  "left"),
+        "ea":           (76.16, 66.5,  "left"),
+        "ubisoft":      (78.3,  55.66, "left"),
     }
 
+    # Publisher bubbles — replicate lines 237-285
     for _, row in pub_chart_df.iterrows():
         pub    = row["publisher_group"]
-        color  = PUBLISHER_COLORS.get(pub, C["muted"])
+        color  = PUBLISHER_COLORS.get(pub, "#888888")
         is_jp  = pub in JP_TARGETS
         symbol = "circle" if is_jp else "square"
-        size   = 20 + 60 * (
-            (row["total_recs"] - size_min) /
-            max(size_max - size_min, 1)
-        )
+        size   = row["sz"]
+
+        # Build per-title hover lines from feat_df
+        pub_titles = feat_df[
+            feat_df["publisher_group"] == pub
+        ].copy()
+        if not pub_titles.empty:
+            pub_titles = pub_titles[
+                pub_titles["oc_score"].notna() &
+                pub_titles["window_pos_rate"].notna()
+            ].sort_values("window_pos_rate", ascending=False)
+        titles_lines = "<br>".join([
+            f"{r['title'][:30]}  "
+            f"{r['window_pos_rate'] * 100:.0f}%  "
+            f"OC {r['oc_score']:.0f}"
+            for _, r in pub_titles.iterrows()
+        ])
+
         fig1.add_trace(go.Scatter(
             x=[row["weighted_oc"]],
             y=[row["weighted_pos"]],
-            mode="markers+text",
+            mode="markers",
             marker=dict(
                 size=size,
                 color=color,
-                opacity=0.88,
+                opacity=0.92,
                 symbol=symbol,
                 line=dict(
-                    color=C["surface"] if is_jp else C["ghost"],
-                    width=2 if is_jp else 1,
+                    color="#FFFFFF" if is_jp else "#888888",
+                    width=2.2 if is_jp else 1.0,
                 ),
             ),
-            text=DISPLAY_NAMES.get(pub, pub),
-            textposition=label_positions.get(pub, "top center"),
-            textfont=dict(family=SANS, size=12, color=C["text"]),
-            name=DISPLAY_NAMES.get(pub, pub),
-            showlegend=False,
+            name=("● " if is_jp else "■ ") + DISPLAY_NAMES.get(pub, pub),
+            showlegend=True,
             hovertemplate=(
                 f"<b>{DISPLAY_NAMES.get(pub, pub)}</b><br>"
-                f"OC score (weighted): %{{x:.1f}}<br>"
-                f"Steam positive rate: %{{y:.1f}}%<br>"
-                f"Most recommended: {row['champion']}"
-                f" ({row['champion_share']:.1f}%)<br>"
-                f"Total recommendations: {int(row['total_recs']):,}"
+                f"OC score (weighted): {row['weighted_oc']:.1f}<br>"
+                f"Steam positive rate: {row['weighted_pos']:.1f}%<br>"
+                f"Most recommended: {row['champion']} "
+                f"({row['champion_share']:.1f}%)<br>"
+                f"Total recommendations: {int(row['total_recs']):,}<br>"
+                f"────────────────────<br>"
+                f"{titles_lines}"
                 "<extra></extra>"
             ),
         ))
 
-    # Zone labels
-    fig1.add_annotation(
-        x=diag_min + 1, y=diag_max - 1,
-        text="overdelivered" if st.session_state.lang != "日本語"
-             else "IP期待を上回る",
-        showarrow=False, xanchor="left",
-        font=dict(family=SANS, size=11, color=C["muted"]),
-    )
-    fig1.add_annotation(
-        x=diag_max - 1, y=diag_min + 1,
-        text="underdelivered" if st.session_state.lang != "日本語"
-             else "IP期待を下回る",
-        showarrow=False, xanchor="right",
-        font=dict(family=SANS, size=11, color=C["muted"]),
-    )
+        # Connector line + annotations — replicate lines 237-285
+        if pub in LABEL_LAYOUT:
+            tx, ty, ha = LABEL_LAYOUT[pub]
+            xanchor = "left" if ha == "left" else "right"
 
-    fig1.update_layout(**_base(h=560))
+            fig1.add_shape(
+                type="line",
+                x0=row["weighted_oc"], y0=row["weighted_pos"],
+                x1=tx, y1=ty + 2.0,
+                line=dict(color="#2A3A5A", width=0.7, dash="dot"),
+                opacity=0.75,
+            )
+            fig1.add_annotation(
+                x=tx, y=ty + 4.0,
+                text=f"<b>{DISPLAY_NAMES.get(pub, pub)}</b>",
+                showarrow=False,
+                xanchor=xanchor, yanchor="bottom",
+                font=dict(family=SANS, size=12, color="#D0D8E8"),
+            )
+            fig1.add_annotation(
+                x=tx, y=ty + 2.6,
+                text="most recommended:",
+                showarrow=False,
+                xanchor=xanchor, yanchor="bottom",
+                font=dict(family=SANS, size=9, color="#8898AA"),
+            )
+            fig1.add_annotation(
+                x=tx, y=ty + 1.3,
+                text=row["champion"],
+                showarrow=False,
+                xanchor=xanchor, yanchor="bottom",
+                font=dict(family=SANS, size=9, color="#8898AA"),
+            )
+            fig1.add_annotation(
+                x=tx, y=ty,
+                text=f"{row['champion_share']:.1f}%",
+                showarrow=False,
+                xanchor=xanchor, yanchor="bottom",
+                font=dict(family=SANS, size=9, color="#8898AA"),
+            )
+
+    # Legend-only marker traces — replicate lines 294-319
+    fig1.add_trace(go.Scatter(
+        x=[None], y=[None], mode="markers",
+        marker=dict(size=10, color="#888888", symbol="circle",
+                    line=dict(color="#CCCCCC", width=1.2)),
+        name="● JP publisher",
+        showlegend=True,
+    ))
+    fig1.add_trace(go.Scatter(
+        x=[None], y=[None], mode="markers",
+        marker=dict(size=9, color="#888888", symbol="square",
+                    line=dict(color="#AAAAAA", width=0.8)),
+        name="■ Western benchmark",
+        showlegend=True,
+    ))
+
+    # Layout — dark, matching hero chart
     fig1.update_layout(
-        xaxis=_xax(
-            title=dict(
-                text="OC Score (weighted)"
-                if st.session_state.lang != "日本語"
-                else "OCスコア（加重平均）",
-                font=dict(size=13, color=C["muted"]),
-            ),
-            range=[diag_min, diag_max],
+        height=560,
+        paper_bgcolor="#080B14",
+        plot_bgcolor="#080B14",
+        font=dict(family=SANS, color="#C8D4E8", size=12),
+        hovermode="closest",
+        hoverlabel=dict(
+            bgcolor="#1A2540",
+            bordercolor="#3A5A8A",
+            font=dict(family=SANS, color="#FFFFFF", size=12),
         ),
-        yaxis=_yax(
+        showlegend=True,
+        legend=dict(
+            x=0.72, y=0.08,
+            bgcolor="#0C1220",
+            bordercolor="#1A2540",
+            borderwidth=1,
+            font=dict(color="#8898AA", size=11),
+        ),
+        margin=dict(l=70, r=40, t=50, b=70),
+        title=dict(
+            text="PC Port Execution Quality",
+            font=dict(size=16, color="#C8D4E8", family=SANS),
+            x=0.5, xanchor="center", y=0.97,
+        ),
+        xaxis=dict(
             title=dict(
-                text="Steam Positive Rate % (weighted)"
-                if st.session_state.lang != "日本語"
-                else "Steamポジティブ率（加重平均）",
-                font=dict(size=13, color=C["muted"]),
+                text="OC Score",
+                font=dict(size=13, color="#6A7A9A"),
             ),
-            range=[diag_min, diag_max],
+            gridcolor="#1A2035",
+            gridwidth=0.7,
+            zerolinecolor="#1A2035",
+            linecolor="#1A2540",
+            tickcolor="#4A5A7A",
+            tickfont=dict(family=MONO, color="#4A5A7A", size=11),
+            range=[XMIN, XMAX],
+        ),
+        yaxis=dict(
+            title=dict(
+                text="Steam Positive Rate",
+                font=dict(size=13, color="#6A7A9A"),
+            ),
+            gridcolor="#1A2035",
+            gridwidth=0.7,
+            zerolinecolor="#1A2035",
+            linecolor="#1A2540",
+            tickcolor="#4A5A7A",
+            tickfont=dict(family=MONO, color="#4A5A7A", size=11),
+            range=[YMIN, YMAX],
             ticksuffix="%",
         ),
-        showlegend=False,
-        margin=dict(l=70, r=40, t=30, b=70),
     )
 
     st.plotly_chart(fig1, use_container_width=True)
