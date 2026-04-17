@@ -830,9 +830,43 @@ if st.session_state.active_tab == 0:
         line_width=0, layer="below",
     )
 
-    # Bubbles
+    # Individual title dots (underneath publisher bubbles)
+    pub_valid = set(pub_chart_df["publisher_group"])
+    title_dots = feat_df[
+        feat_df["publisher_group"].isin(pub_valid) &
+        feat_df["oc_score"].notna() &
+        feat_df["window_pos_rate"].notna()
+    ].copy()
+    for pub_key, grp in title_dots.groupby("publisher_group"):
+        dot_color = PUBLISHER_COLORS.get(pub_key, C["muted"])
+        fig1.add_trace(go.Scatter(
+            x=grp["oc_score"],
+            y=grp["window_pos_rate"] * 100,
+            mode="markers",
+            marker=dict(size=8, color=dot_color, opacity=0.45),
+            showlegend=False,
+            hovertemplate=(
+                "<b>%{customdata}</b><br>"
+                "OC: %{x:.1f}<br>"
+                "Steam positive: %{y:.1f}%"
+                "<extra></extra>"
+            ),
+            customdata=grp["title"].values,
+        ))
+
+    # Publisher bubbles
     size_min = pub_chart_df["total_recs"].min()
     size_max = pub_chart_df["total_recs"].max()
+
+    label_positions = {
+        "sega_atlus":   "top left",
+        "take_two":     "bottom right",
+        "sie":          "top right",
+        "square_enix":  "middle left",
+        "bandai_namco": "top right",
+        "ea":           "top left",
+        "ubisoft":      "bottom right",
+    }
 
     for _, row in pub_chart_df.iterrows():
         pub    = row["publisher_group"]
@@ -858,8 +892,8 @@ if st.session_state.active_tab == 0:
                 ),
             ),
             text=DISPLAY_NAMES.get(pub, pub),
-            textposition="top center",
-            textfont=dict(family=SANS, size=12, color=color),
+            textposition=label_positions.get(pub, "top center"),
+            textfont=dict(family=SANS, size=12, color=C["text"]),
             name=DISPLAY_NAMES.get(pub, pub),
             showlegend=False,
             hovertemplate=(
