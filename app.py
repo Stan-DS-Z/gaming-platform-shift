@@ -1797,23 +1797,6 @@ elif st.session_state.active_tab == 3:
                 xanchor="left",
             )
 
-        # Vertical line at 50% predicted probability
-        fig_cal.add_vline(
-            x=0.5,
-            line=dict(color=C["border2"], width=1, dash="dot"),
-            annotation_text="50% threshold",
-            annotation_font=dict(family=MONO, size=10, color=C["muted"]),
-            annotation_position="top right",
-        )
-        # Horizontal line at 75% actual positive rate
-        fig_cal.add_hline(
-            y=0.75,
-            line=dict(color=C["border2"], width=1, dash="dot"),
-            annotation_text="75% target",
-            annotation_font=dict(family=MONO, size=10, color=C["muted"]),
-            annotation_position="bottom right",
-        )
-
         fig_cal.update_layout(**_base(h=280))
         fig_cal.update_layout(
             xaxis=_xax(title=dict(text="Predicted probability",
@@ -1833,8 +1816,8 @@ elif st.session_state.active_tab == 3:
             text="model underestimated",
             showarrow=False,
             xanchor="left", yanchor="top",
-            font=dict(family=SANS, size=10, color=C["muted"]),
-            bgcolor=C["highlight"],
+            font=dict(family=SANS, size=10, color="#3D7A6F"),
+            bgcolor="#E8F5F2",
             borderpad=4,
             opacity=0.85,
         )
@@ -1845,8 +1828,8 @@ elif st.session_state.active_tab == 3:
             text="model overestimated",
             showarrow=False,
             xanchor="right", yanchor="bottom",
-            font=dict(family=SANS, size=10, color=C["muted"]),
-            bgcolor=C["highlight"],
+            font=dict(family=SANS, size=10, color="#8B4F3F"),
+            bgcolor="#FAF0EE",
             borderpad=4,
             opacity=0.85,
         )
