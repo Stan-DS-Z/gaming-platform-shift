@@ -1734,8 +1734,29 @@ elif st.session_state.active_tab == 3:
     with col_r:
         _section_label(t("calibration"))
         _explain_bi(
-            "Each dot is one game. The diagonal = perfect prediction. Dots above the line exceeded expectations; dots below underperformed. Misclassified titles (✗) show where the model's assumptions break down — hover for details.",
-            "各ドットは1タイトル。対角線＝完全な予測。線の上＝期待以上、線の下＝期待以下。誤分類タイトル（✗）はモデルの前提が崩れた箇所 — ホバーで詳細表示。",
+            "The model uses 7 launch signals — OC score, "
+            "VADER sentiment, launch delta, playtime-sentiment r, "
+            "PC-specific negative rate, English review share, and "
+            "franchise sequence index — to predict whether a title "
+            "will achieve ≥75% lifetime positive rate on Steam. "
+            "Each dot plots that predicted probability (x) against "
+            "the title's actual lifetime positive rate (y). "
+            "The diagonal = perfect calibration. "
+            "Dots above the line performed better than predicted; "
+            "dots below performed worse. "
+            "Misclassified titles (✗) are games where the binary "
+            "prediction was wrong — the model predicted above or "
+            "below the 75% threshold and reality disagreed. "
+            "Hover any dot for title, publisher, and exact values.",
+            "モデルは7つのローンチシグナル——OCスコア、VADER感情値、"
+            "ローンチΔ、プレイ時間-感情相関、PC特有ネガティブ率、"
+            "英語レビュー比率、フランチャイズ順序——を使って、"
+            "タイトルのSteamライフタイムポジティブ率が75%以上になるかを予測する。"
+            "各ドットはその予測確率（x軸）と実際のライフタイムポジティブ率（y軸）を示す。"
+            "対角線＝完全な較正。対角線より上＝予測を上回る実績、"
+            "対角線より下＝予測を下回る実績。"
+            "誤分類タイトル（✗）は75%閾値の二値予測が外れたタイトル。"
+            "ホバーでタイトル、パブリッシャー、詳細値を確認できる。",
         )
         fig_cal = go.Figure()
 
