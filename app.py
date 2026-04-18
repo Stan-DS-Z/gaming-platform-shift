@@ -1797,6 +1797,23 @@ elif st.session_state.active_tab == 3:
                 xanchor="left",
             )
 
+        # Vertical line at 50% predicted probability
+        fig_cal.add_vline(
+            x=0.5,
+            line=dict(color=C["border2"], width=1, dash="dot"),
+            annotation_text="50% threshold",
+            annotation_font=dict(family=MONO, size=10, color=C["muted"]),
+            annotation_position="top right",
+        )
+        # Horizontal line at 75% actual positive rate
+        fig_cal.add_hline(
+            y=0.75,
+            line=dict(color=C["border2"], width=1, dash="dot"),
+            annotation_text="75% target",
+            annotation_font=dict(family=MONO, size=10, color=C["muted"]),
+            annotation_position="bottom right",
+        )
+
         fig_cal.update_layout(**_base(h=280))
         fig_cal.update_layout(
             xaxis=_xax(title=dict(text="Predicted probability",
@@ -1808,6 +1825,30 @@ elif st.session_state.active_tab == 3:
                        range=[0.52, 1.05],
                        tickformat=".1%"),
             margin=dict(l=55, r=20, t=8, b=50),
+        )
+        # Zone: model underestimated (top-left)
+        fig_cal.add_annotation(
+            x=0.29, y=0.99,
+            xref="x", yref="y",
+            text="model underestimated",
+            showarrow=False,
+            xanchor="left", yanchor="top",
+            font=dict(family=SANS, size=10, color=C["muted"]),
+            bgcolor=C["highlight"],
+            borderpad=4,
+            opacity=0.85,
+        )
+        # Zone: model overestimated (bottom-right)
+        fig_cal.add_annotation(
+            x=1.04, y=0.53,
+            xref="x", yref="y",
+            text="model overestimated",
+            showarrow=False,
+            xanchor="right", yanchor="bottom",
+            font=dict(family=SANS, size=10, color=C["muted"]),
+            bgcolor=C["highlight"],
+            borderpad=4,
+            opacity=0.85,
         )
         # Left slash of break marker
         fig_cal.add_shape(
