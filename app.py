@@ -1777,7 +1777,7 @@ elif st.session_state.active_tab == 3:
                 hovertemplate=(
                     f"<b>{r['title']}</b><br>"
                     f"{DISPLAY_NAMES.get(pub, pub)}<br>"
-                    f"Predicted: %{{x:.0%}}<br>"
+                    f"Predicted: %{{x:.1%}}<br>"
                     f"Actual: %{{y:.1%}}<br>"
                     f"{'✗ Misclassified' if correct == 0 else '✓ Correct'}"
                     "<extra></extra>"
@@ -1802,11 +1802,11 @@ elif st.session_state.active_tab == 3:
             xaxis=_xax(title=dict(text="Predicted probability",
                                   font=dict(size=12, color=C["muted"])),
                        range=[0.28, 1.05],
-                       tickformat=".0%"),
+                       tickformat=".1%"),
             yaxis=_yax(title=dict(text="Actual positive rate",
                                   font=dict(size=12, color=C["muted"])),
                        range=[0.52, 1.05],
-                       tickformat=".0%"),
+                       tickformat=".1%"),
             margin=dict(l=55, r=20, t=8, b=50),
         )
         # Left slash of break marker
