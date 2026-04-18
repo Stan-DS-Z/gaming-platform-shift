@@ -1804,7 +1804,8 @@ elif st.session_state.active_tab == 3:
                        range=[0.28, 1.05]),
             yaxis=_yax(title=dict(text="Actual positive rate",
                                   font=dict(size=12, color=C["muted"])),
-                       range=[0.52, 1.05]),
+                       range=[0.52, 1.05],
+                       tickformat=".0%"),
             margin=dict(l=55, r=20, t=8, b=50),
         )
         # Left slash of break marker
