@@ -1777,7 +1777,7 @@ elif st.session_state.active_tab == 3:
                 hovertemplate=(
                     f"<b>{r['title']}</b><br>"
                     f"{DISPLAY_NAMES.get(pub, pub)}<br>"
-                    f"Predicted: %{{x:.2f}}<br>"
+                    f"Predicted: %{{x:.0%}}<br>"
                     f"Actual: %{{y:.1%}}<br>"
                     f"{'✗ Misclassified' if correct == 0 else '✓ Correct'}"
                     "<extra></extra>"
@@ -1801,7 +1801,8 @@ elif st.session_state.active_tab == 3:
         fig_cal.update_layout(
             xaxis=_xax(title=dict(text="Predicted probability",
                                   font=dict(size=12, color=C["muted"])),
-                       range=[0.28, 1.05]),
+                       range=[0.28, 1.05],
+                       tickformat=".0%"),
             yaxis=_yax(title=dict(text="Actual positive rate",
                                   font=dict(size=12, color=C["muted"])),
                        range=[0.52, 1.05],
