@@ -1734,29 +1734,18 @@ elif st.session_state.active_tab == 3:
     with col_r:
         _section_label(t("calibration"))
         _explain_bi(
-            "The model uses 7 launch signals — OC score, "
-            "VADER sentiment, launch delta, playtime-sentiment r, "
-            "PC-specific negative rate, English review share, and "
-            "franchise sequence index — to predict whether a title "
-            "will achieve ≥75% lifetime positive rate on Steam. "
-            "Each dot plots that predicted probability (x) against "
-            "the title's actual lifetime positive rate (y). "
-            "The diagonal = perfect calibration. "
-            "Dots above the line performed better than predicted; "
-            "dots below performed worse. "
-            "Misclassified titles (✗) are games where the binary "
-            "prediction was wrong — the model predicted above or "
-            "below the 75% threshold and reality disagreed. "
-            "Hover any dot for title, publisher, and exact values.",
-            "モデルは7つのローンチシグナル——OCスコア、VADER感情値、"
-            "ローンチΔ、プレイ時間-感情相関、PC特有ネガティブ率、"
-            "英語レビュー比率、フランチャイズ順序——を使って、"
-            "タイトルのSteamライフタイムポジティブ率が75%以上になるかを予測する。"
-            "各ドットはその予測確率（x軸）と実際のライフタイムポジティブ率（y軸）を示す。"
-            "対角線＝完全な較正。対角線より上＝予測を上回る実績、"
-            "対角線より下＝予測を下回る実績。"
-            "誤分類タイトル（✗）は75%閾値の二値予測が外れたタイトル。"
-            "ホバーでタイトル、パブリッシャー、詳細値を確認できる。",
+            "7 launch signals predict whether a title achieves "
+            "≥75% lifetime positive rate. Each dot = one title: "
+            "x = model's predicted probability, y = actual Steam "
+            "positive rate. Diagonal = perfect calibration — "
+            "most titles sit above it, meaning the model "
+            "tends to under-predict. ✗ = binary prediction wrong. "
+            "Hover for details.",
+            "7つのローンチシグナルでライフタイムポジティブ率75%以上を予測。"
+            "各ドット：x＝予測確率、y＝実際のポジティブ率。"
+            "対角線＝完全な較正。大半のドットが対角線より上——"
+            "モデルは実績を過小評価する傾向がある。✗＝二値予測の外れ。"
+            "ホバーで詳細表示。",
         )
         fig_cal = go.Figure()
 
@@ -1836,7 +1825,7 @@ elif st.session_state.active_tab == 3:
         )
         st.plotly_chart(fig_cal, use_container_width=True)
         st.markdown(
-            f"<p style='font-family:{MONO};font-size:11px;"
+            f"<p style='font-family:{MONO};font-size:9px;"
             f"color:{C['ghost']};margin-top:-8px;'>"
             f"* 1 title outside axis range — "
             f"Star Wars Outlaws (predicted=0.02, actual=0.27)"
