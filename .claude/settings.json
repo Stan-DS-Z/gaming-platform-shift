@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls .venv/)",
+      "Bash(ls venv/)",
+      "Bash(py -3 --version)",
+      "Bash(python3 -m streamlit run \"c:\\\\Users\\\\stanl\\\\OneDrive\\\\Desktop\\\\VSCode_Projects\\\\2. ThePlatformShift_ADeepDive\\\\app.py\")"
+    ]
+  }
+}

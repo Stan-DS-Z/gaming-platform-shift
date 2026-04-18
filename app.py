@@ -1715,11 +1715,14 @@ elif st.session_state.active_tab == 3:
                 "<extra></extra>"
             ),
         ))
-        fig_pa.add_vline(x=loocv_acc,
-                         line=dict(color=C["border2"], width=1, dash="dot"),
-                         annotation_text=f"overall {loocv_acc:.0%}",
-                         annotation_font=dict(family=MONO, size=11, color=C["muted"]),
-                         annotation_position="top")
+        fig_pa.add_vline(
+            x=loocv_acc,
+            line=dict(color=C["border2"], width=1, dash="dot"),
+            annotation_text=f"overall {loocv_acc:.0%}",
+            annotation_font=dict(family=MONO, size=11, color=C["muted"]),
+            annotation_position="bottom right",
+            annotation_yshift=-10,
+        )
         fig_pa.update_layout(**_base(h=280))
         fig_pa.update_layout(
             xaxis=_xax(tickformat=".0%", range=[0, 1.15]),
@@ -1788,13 +1791,37 @@ elif st.session_state.active_tab == 3:
         fig_cal.update_layout(
             xaxis=_xax(title=dict(text="Predicted probability",
                                   font=dict(size=12, color=C["muted"])),
-                       range=[-0.05, 1.05]),
+                       range=[0.28, 1.05]),
             yaxis=_yax(title=dict(text="Actual positive rate",
                                   font=dict(size=12, color=C["muted"])),
-                       range=[-0.05, 1.05]),
+                       range=[0.52, 1.05]),
             margin=dict(l=55, r=20, t=8, b=50),
         )
+        # Left slash of break marker
+        fig_cal.add_shape(
+            type="line",
+            x0=0.285, y0=0.528,
+            x1=0.295, y1=0.538,
+            xref="x", yref="y",
+            line=dict(color=C["muted"], width=1.5),
+        )
+        # Right slash of break marker
+        fig_cal.add_shape(
+            type="line",
+            x0=0.295, y0=0.528,
+            x1=0.305, y1=0.538,
+            xref="x", yref="y",
+            line=dict(color=C["muted"], width=1.5),
+        )
         st.plotly_chart(fig_cal, use_container_width=True)
+        st.markdown(
+            f"<p style='font-family:{MONO};font-size:11px;"
+            f"color:{C['ghost']};margin-top:-8px;'>"
+            f"* 1 title outside axis range — "
+            f"Star Wars Outlaws (predicted=0.02, actual=0.27)"
+            f"</p>",
+            unsafe_allow_html=True,
+        )
 
     # ── Misclassified titles table ──
     if len(mis) > 0:
