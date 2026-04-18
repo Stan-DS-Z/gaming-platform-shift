@@ -1825,7 +1825,7 @@ elif st.session_state.active_tab == 3:
         )
         st.plotly_chart(fig_cal, use_container_width=True)
         st.markdown(
-            f"<p style='font-family:{MONO};font-size:9px;"
+            f"<p style='font-family:{MONO};font-size:4.5px;"
             f"color:{C['ghost']};margin-top:-8px;'>"
             f"* 1 title outside axis range — "
             f"Star Wars Outlaws (predicted=0.02, actual=0.27)"
