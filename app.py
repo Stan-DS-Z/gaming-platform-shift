@@ -1725,9 +1725,9 @@ elif st.session_state.active_tab == 3:
         )
         fig_pa.update_layout(**_base(h=280))
         fig_pa.update_layout(
-            xaxis=_xax(tickformat=".0%", range=[0, 1.15]),
+            xaxis=_xax(tickformat=".0%", range=[0, 1.20]),
             yaxis=_yax(),
-            margin=dict(l=8, r=68, t=8, b=30),
+            margin=dict(l=8, r=90, t=8, b=30),
         )
         st.plotly_chart(fig_pa, use_container_width=True)
 
