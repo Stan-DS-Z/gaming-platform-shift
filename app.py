@@ -1787,14 +1787,24 @@ elif st.session_state.active_tab == 3:
         # Label misclassified
         mis = results_df[results_df["correct"] == 0]
         for _, r in mis.iterrows():
+            prob = float(r["logreg_proba"])
+            pos  = float(r["window_pos_rate"])
+            if prob > 0.85:
+                ax, ay, xanchor = -60, -20, "right"
+            elif prob > 0.70:
+                ax, ay, xanchor = -50, 20, "right"
+            elif prob < 0.55 and pos > 0.78:
+                ax, ay, xanchor = 40, -15, "left"
+            else:
+                ax, ay, xanchor = 40, -15, "left"
             fig_cal.add_annotation(
                 x=float(r["logreg_proba"]) + 0.03,
                 y=float(r["window_pos_rate"]),
                 text=r["title"],
                 showarrow=True, arrowhead=0, arrowwidth=0.5,
-                arrowcolor=C["down"], ax=40, ay=-10,
+                arrowcolor=C["down"], ax=ax, ay=ay,
                 font=dict(family=SANS, size=10, color=C["down"]),
-                xanchor="left",
+                xanchor=xanchor,
             )
 
         fig_cal.update_layout(**_base(h=280))
