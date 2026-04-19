@@ -1812,6 +1812,9 @@ elif st.session_state.active_tab == 3:
             "Assassin's Creed Shadows": {
                 "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": -14,
             },
+            "Tekken 8": {
+                "ax": 0, "ay": 0, "xanchor": "center", "showarrow": False, "xshift": 0, "yshift": 14,
+            },
         }
 
         for _, r in mis.iterrows():
@@ -1843,7 +1846,7 @@ elif st.session_state.active_tab == 3:
                        tickformat=".1%"),
             yaxis=_yax(title=dict(text="Actual positive rate",
                                   font=dict(size=12, color=C["muted"])),
-                       range=[0.52, 1.05],
+                       range=[0.40, 1.05],
                        tickformat=".1%"),
             margin=dict(l=55, r=20, t=8, b=50),
         )
@@ -1870,22 +1873,6 @@ elif st.session_state.active_tab == 3:
             bgcolor="#FAF0EE",
             borderpad=4,
             opacity=0.85,
-        )
-        # Left slash of break marker
-        fig_cal.add_shape(
-            type="line",
-            x0=0.285, y0=0.528,
-            x1=0.295, y1=0.538,
-            xref="x", yref="y",
-            line=dict(color=C["muted"], width=1.5),
-        )
-        # Right slash of break marker
-        fig_cal.add_shape(
-            type="line",
-            x0=0.295, y0=0.528,
-            x1=0.305, y1=0.538,
-            xref="x", yref="y",
-            line=dict(color=C["muted"], width=1.5),
         )
         st.plotly_chart(fig_cal, use_container_width=True)
         st.markdown(
