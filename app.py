@@ -1784,27 +1784,53 @@ elif st.session_state.active_tab == 3:
                 ),
             ))
 
-        # Label misclassified
         mis = results_df[results_df["correct"] == 0]
+
+        # Per-title annotation layout — handcrafted to avoid overlap
+        LABEL_CONFIG = {
+            "Sonic Frontiers": {
+                "ax": 50, "ay": -25, "xanchor": "left", "showarrow": True,
+            },
+            "Returnal": {
+                "ax": 50, "ay": 15, "xanchor": "left", "showarrow": True,
+            },
+            "Final Fantasy XIV Online": {
+                "ax": -10, "ay": -25, "xanchor": "right", "showarrow": True,
+            },
+            "Helldivers 2": {
+                "ax": 50, "ay": -20, "xanchor": "left", "showarrow": True,
+            },
+            "Tales of Arise": {
+                "ax": 50, "ay": -20, "xanchor": "left", "showarrow": True,
+            },
+            "Apex Legends": {
+                "ax": 50, "ay": 20, "xanchor": "left", "showarrow": True,
+            },
+            "EA Sports FC 25": {
+                "ax": 50, "ay": 20, "xanchor": "left", "showarrow": True,
+            },
+            "Assassin's Creed Shadows": {
+                "ax": -10, "ay": 25, "xanchor": "right", "showarrow": True,
+            },
+        }
+
         for _, r in mis.iterrows():
-            prob = float(r["logreg_proba"])
-            pos  = float(r["window_pos_rate"])
-            if prob > 0.85:
-                ax, ay, xanchor = -60, -20, "right"
-            elif prob > 0.70:
-                ax, ay, xanchor = -50, 20, "right"
-            elif prob < 0.55 and pos > 0.78:
-                ax, ay, xanchor = 40, -15, "left"
-            else:
-                ax, ay, xanchor = 40, -15, "left"
+            title = r["title"]
+            cfg = LABEL_CONFIG.get(title, {
+                "ax": 40, "ay": -15, "xanchor": "left", "showarrow": True,
+            })
             fig_cal.add_annotation(
-                x=float(r["logreg_proba"]) + 0.03,
+                x=float(r["logreg_proba"]),
                 y=float(r["window_pos_rate"]),
-                text=r["title"],
-                showarrow=True, arrowhead=0, arrowwidth=0.5,
-                arrowcolor=C["down"], ax=ax, ay=ay,
+                text=title,
+                showarrow=cfg["showarrow"],
+                arrowhead=0,
+                arrowwidth=0.5,
+                arrowcolor=C["down"],
+                ax=cfg["ax"],
+                ay=cfg["ay"],
                 font=dict(family=SANS, size=10, color=C["down"]),
-                xanchor=xanchor,
+                xanchor=cfg["xanchor"],
             )
 
         fig_cal.update_layout(**_base(h=280))
