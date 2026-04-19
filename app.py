@@ -1852,7 +1852,7 @@ elif st.session_state.active_tab == 3:
         )
         # Zone: model underestimated (top-left)
         fig_cal.add_annotation(
-            x=0.29, y=0.99,
+            x=0.28, y=1.05,
             xref="x", yref="y",
             text="model underestimated",
             showarrow=False,
@@ -1864,7 +1864,7 @@ elif st.session_state.active_tab == 3:
         )
         # Zone: model overestimated (bottom-right)
         fig_cal.add_annotation(
-            x=1.04, y=0.53,
+            x=1.05, y=0.40,
             xref="x", yref="y",
             text="model overestimated",
             showarrow=False,
