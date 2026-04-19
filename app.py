@@ -1798,7 +1798,7 @@ elif st.session_state.active_tab == 3:
                 "ax": -10, "ay": -25, "xanchor": "right", "showarrow": True,
             },
             "Helldivers 2": {
-                "ax": 50, "ay": -20, "xanchor": "left", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "right", "showarrow": False, "xshift": -8, "yshift": 8,
             },
             "Tales of Arise": {
                 "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
@@ -1807,10 +1807,10 @@ elif st.session_state.active_tab == 3:
                 "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "EA Sports FC 25": {
-                "ax": 50, "ay": 20, "xanchor": "left", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "Assassin's Creed Shadows": {
-                "ax": -10, "ay": 25, "xanchor": "right", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
         }
 
