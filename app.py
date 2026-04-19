@@ -1789,10 +1789,10 @@ elif st.session_state.active_tab == 3:
         # Per-title annotation layout — handcrafted to avoid overlap
         LABEL_CONFIG = {
             "Sonic Frontiers": {
-                "ax": 50, "ay": -25, "xanchor": "left", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "Returnal": {
-                "ax": 50, "ay": 15, "xanchor": "left", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "Final Fantasy XIV Online": {
                 "ax": -10, "ay": -25, "xanchor": "right", "showarrow": True,
@@ -1801,10 +1801,10 @@ elif st.session_state.active_tab == 3:
                 "ax": 50, "ay": -20, "xanchor": "left", "showarrow": True,
             },
             "Tales of Arise": {
-                "ax": 50, "ay": -20, "xanchor": "left", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "Apex Legends": {
-                "ax": 50, "ay": 20, "xanchor": "left", "showarrow": True,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "EA Sports FC 25": {
                 "ax": 50, "ay": 20, "xanchor": "left", "showarrow": True,
@@ -1829,6 +1829,8 @@ elif st.session_state.active_tab == 3:
                 arrowcolor=C["down"],
                 ax=cfg["ax"],
                 ay=cfg["ay"],
+                xshift=cfg.get("xshift", 0),
+                yshift=cfg.get("yshift", 0),
                 font=dict(family=SANS, size=10, color=C["down"]),
                 xanchor=cfg["xanchor"],
             )
