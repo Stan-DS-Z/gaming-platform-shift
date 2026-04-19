@@ -1810,7 +1810,7 @@ elif st.session_state.active_tab == 3:
                 "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": 8,
             },
             "Assassin's Creed Shadows": {
-                "ax": 0, "ay": 0, "xanchor": "center", "showarrow": False, "xshift": 0, "yshift": -14,
+                "ax": 0, "ay": 0, "xanchor": "left", "showarrow": False, "xshift": 8, "yshift": -14,
             },
         }
 
