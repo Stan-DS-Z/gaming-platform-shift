@@ -863,15 +863,16 @@ if st.session_state.active_tab == 0:
 
     # Label offsets — (dx, ha): anchor = (bubble_x + dx, bubble_y - 2)
     # ty = bubble_y - 2.0 vertically centres the 4-line block on the bubble.
-    # Directions chosen so no two labels share the same horizontal zone.
+    # dx=±2.5 clears even the largest bubble radius (~1.2 data units at this scale).
+    # Directions chosen so no two labels share the same x-zone at the same y-band.
     LABEL_OFFSETS = {
-        "take_two":     (-0.3, "right"),   # upper-left bubble  → label left
-        "sega_atlus":   ( 0.3, "left"),    # upper-right bubble → label right
-        "bandai_namco": (-0.3, "right"),   # far-right bubble   → label left
-        "sie":          (-0.3, "right"),   # middle cluster     → label left
-        "square_enix":  ( 0.3, "left"),    # middle cluster     → label right
-        "ea":           (-0.5, "right"),   # bottom-left bubble → label left
-        "ubisoft":      ( 0.3, "left"),    # bottom bubble      → label right
+        "take_two":     (-2.5, "right"),   # top-left  → label left
+        "sega_atlus":   ( 2.5, "left"),    # top-right → label right
+        "bandai_namco": (-2.5, "right"),   # far-right → label left
+        "sie":          (-2.5, "right"),   # middle cluster → label left
+        "square_enix":  ( 2.5, "left"),    # middle cluster → label right
+        "ea":           ( 2.5, "left"),    # bottom-left → label right (avoids left-edge clip)
+        "ubisoft":      (-2.5, "right"),   # bottom → label left (ea goes right)
     }
 
     # Publisher bubbles — replicate lines 237-285
