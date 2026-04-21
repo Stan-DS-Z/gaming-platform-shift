@@ -861,15 +861,20 @@ if st.session_state.active_tab == 0:
         opacity=0.72,
     )
 
-    # Label layout — replicate LABEL_LAYOUT lines 216-232
+    # Label layout — tx, ty (bottom of 4-line block), ha
+    # Positions tuned to actual bubble coords:
+    #   take_two (83.3, 93.1)  sega_atlus (88.0, 93.7)
+    #   sie (84.9, 80.6)       square_enix (85.9, 81.8)
+    #   bandai_namco (92.4, 87.8)
+    #   ea (75.1, 62.3)        ubisoft (79.1, 64.5)
     LABEL_LAYOUT = {
-        "sega_atlus":   (83.02, 93.5,  "left"),
-        "take_two":     (82.5,  85.5,  "right"),
-        "sie":          (89.5,  86.68, "left"),
-        "square_enix":  (81.0,  78.78, "right"),
-        "bandai_namco": (86.7,  74.5,  "left"),
-        "ea":           (76.16, 66.5,  "left"),
-        "ubisoft":      (78.3,  55.66, "left"),
+        "take_two":     (79.0,  89.5,  "right"),   # top-left → label left
+        "sega_atlus":   (90.5,  91.5,  "left"),    # top-right → label right
+        "bandai_namco": (87.5,  84.5,  "right"),   # far-right → label left
+        "sie":          (80.5,  77.0,  "right"),   # middle cluster → label left
+        "square_enix":  (89.5,  79.5,  "left"),    # middle cluster → label right
+        "ea":           (72.5,  60.0,  "right"),   # bottom-left → label left
+        "ubisoft":      (82.0,  62.0,  "left"),    # bottom → label right
     }
 
     # Publisher bubbles — replicate lines 237-285
