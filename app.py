@@ -861,19 +861,24 @@ if st.session_state.active_tab == 0:
         opacity=0.72,
     )
 
-    # Label offsets — (dx, ha): anchor = (bubble_x + dx, bubble_y - 2)
-    # ty = bubble_y - 2.0 vertically centres the 4-line block on the bubble.
-    # dx=±2.5 clears even the largest bubble radius (~1.2 data units at this scale).
-    # Directions chosen so no two labels share the same x-zone at the same y-band.
-    LABEL_OFFSETS = {
-        "take_two":     (-2.5, "right"),   # top-left  → label left
-        "sega_atlus":   ( 2.5, "left"),    # top-right → label right
-        "bandai_namco": (-2.5, "right"),   # far-right → label left
-        "sie":          (-2.5, "right"),   # middle cluster → label left
-        "square_enix":  ( 2.5, "left"),    # middle cluster → label right
-        "ea":           ( 2.5, "left"),    # bottom-left → label right (avoids left-edge clip)
-        "ubisoft":      (-2.5, "right"),   # bottom → label left (ea goes right)
+    # Label placement: (side, ha, dy_adj)
+    # side +1=right, -1=left; dx computed per-bubble from actual marker radius.
+    # dy_adj shifts the block vertically so EA and Ubisoft (close in y, opposite
+    # sides) don't clip each other: EA drops below its bubble, Ubisoft rises above.
+    LABEL_SIDE = {
+        "take_two":     (-1, "right",  0.0),
+        "sega_atlus":   (+1, "left",   0.0),
+        "bandai_namco": (+1, "left",   0.0),
+        "square_enix":  (+1, "left",   0.0),
+        "sie":          (-1, "right",  0.0),
+        "ea":           (+1, "left",  -2.0),
+        "ubisoft":      (-1, "right",  2.0),
     }
+
+    # Marker size (sz) is pixel diameter in Plotly. Convert radius → x data-units.
+    # Assumes ~1100 px total chart width with margins l=70, r=40.
+    _px_per_x = (1100 - 70 - 40) / (XMAX - XMIN)
+    _GAP_PX = 5  # clear air beyond marker edge
 
     # Publisher bubbles — replicate lines 237-285
     for _, row in pub_chart_df.iterrows():
@@ -928,12 +933,13 @@ if st.session_state.active_tab == 0:
             ),
         ))
 
-        # Annotations — placed directly adjacent to bubble, no connector line
-        if pub in LABEL_OFFSETS:
-            dx, ha = LABEL_OFFSETS[pub]
+        # Annotations — placed immediately outside the marker edge
+        if pub in LABEL_SIDE:
+            side, ha, dy_adj = LABEL_SIDE[pub]
+            dx = side * (row["sz"] / 2 + _GAP_PX) / _px_per_x
             tx = row["weighted_oc"] + dx
-            ty = row["weighted_pos"] - 2.0
-            xanchor = "left" if ha == "left" else "right"
+            ty = row["weighted_pos"] - 2.0 + dy_adj
+            xanchor = ha
 
             fig1.add_annotation(
                 x=tx, y=ty + 4.0,
