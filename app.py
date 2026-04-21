@@ -861,20 +861,17 @@ if st.session_state.active_tab == 0:
         opacity=0.72,
     )
 
-    # Label layout — tx, ty (bottom of 4-line block), ha
-    # Positions tuned to actual bubble coords:
-    #   take_two (83.3, 93.1)  sega_atlus (88.0, 93.7)
-    #   sie (84.9, 80.6)       square_enix (85.9, 81.8)
-    #   bandai_namco (92.4, 87.8)
-    #   ea (75.1, 62.3)        ubisoft (79.1, 64.5)
-    LABEL_LAYOUT = {
-        "take_two":     (79.0,  89.5,  "right"),   # top-left → label left
-        "sega_atlus":   (90.5,  91.5,  "left"),    # top-right → label right
-        "bandai_namco": (87.5,  84.5,  "right"),   # far-right → label left
-        "sie":          (80.5,  77.0,  "right"),   # middle cluster → label left
-        "square_enix":  (89.5,  79.5,  "left"),    # middle cluster → label right
-        "ea":           (72.5,  60.0,  "right"),   # bottom-left → label left
-        "ubisoft":      (82.0,  62.0,  "left"),    # bottom → label right
+    # Label offsets — (dx, ha): anchor = (bubble_x + dx, bubble_y - 2)
+    # ty = bubble_y - 2.0 vertically centres the 4-line block on the bubble.
+    # Directions chosen so no two labels share the same horizontal zone.
+    LABEL_OFFSETS = {
+        "take_two":     (-0.3, "right"),   # upper-left bubble  → label left
+        "sega_atlus":   ( 0.3, "left"),    # upper-right bubble → label right
+        "bandai_namco": (-0.3, "right"),   # far-right bubble   → label left
+        "sie":          (-0.3, "right"),   # middle cluster     → label left
+        "square_enix":  ( 0.3, "left"),    # middle cluster     → label right
+        "ea":           (-0.5, "right"),   # bottom-left bubble → label left
+        "ubisoft":      ( 0.3, "left"),    # bottom bubble      → label right
     }
 
     # Publisher bubbles — replicate lines 237-285
@@ -930,18 +927,13 @@ if st.session_state.active_tab == 0:
             ),
         ))
 
-        # Connector line + annotations — replicate lines 237-285
-        if pub in LABEL_LAYOUT:
-            tx, ty, ha = LABEL_LAYOUT[pub]
+        # Annotations — placed directly adjacent to bubble, no connector line
+        if pub in LABEL_OFFSETS:
+            dx, ha = LABEL_OFFSETS[pub]
+            tx = row["weighted_oc"] + dx
+            ty = row["weighted_pos"] - 2.0
             xanchor = "left" if ha == "left" else "right"
 
-            fig1.add_shape(
-                type="line",
-                x0=row["weighted_oc"], y0=row["weighted_pos"],
-                x1=tx, y1=ty + 2.0,
-                line=dict(color="#2A3A5A", width=0.7, dash="dot"),
-                opacity=0.75,
-            )
             fig1.add_annotation(
                 x=tx, y=ty + 4.0,
                 text=f"<b>{DISPLAY_NAMES.get(pub, pub)}</b>",
